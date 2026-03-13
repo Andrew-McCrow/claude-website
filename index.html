@@ -908,21 +908,23 @@
     <script>
       (function () {
         "use strict";
-        var C_TEAL = new THREE.Color("#7fd8be"),
-          C_WHITE = new THREE.Color("#fafaf8"),
+        var C_DEEP_NAVY = new THREE.Color("#0d1b2a"),
+          C_PRIMARY_ACCENT = new THREE.Color("#7fd8be"),
+          C_SLATE_GRAY = new THREE.Color("#475569"),
           C_CORAL = new THREE.Color("#ff6b6b"),
-          C_MID = new THREE.Color("#3a7a9c");
+          C_WARM_WHITE = new THREE.Color("#fafaf8"),
+          C_MIDNIGHT_BLUE = new THREE.Color("#1b263b");
         var PALETTE = [
-          C_TEAL,
-          C_TEAL,
-          C_WHITE,
-          C_TEAL,
+          C_PRIMARY_ACCENT,
+          C_PRIMARY_ACCENT,
+          C_PRIMARY_ACCENT,
+          C_WARM_WHITE,
+          C_WARM_WHITE,
           C_CORAL,
-          C_MID,
-          C_TEAL,
-          C_WHITE,
-          C_TEAL,
-          C_TEAL,
+          C_CORAL,
+          C_SLATE_GRAY,
+          C_PRIMARY_ACCENT,
+          C_WARM_WHITE,
         ];
         var BG = 0x0d1b2a;
         var canvas = document.getElementById("scene");
@@ -998,12 +1000,13 @@
           geo.computeVertexNormals();
           return geo;
         }
-        var N = 1000;
+        var N = 1400;
         var geoMain = createBabyOctopusGeometry(0.028, 7, 6, 6);
-        var matMain = new THREE.MeshStandardMaterial({
+        var matMain = new THREE.MeshBasicMaterial({
           color: 0xffffff,
-          roughness: 0.18,
-          metalness: 0.62,
+          wireframe: true,
+          transparent: true,
+          opacity: 0.18,
         });
         var meshMain = new THREE.InstancedMesh(geoMain, matMain, N);
         meshMain.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
@@ -1027,13 +1030,13 @@
         var colorIdx = Array.from({ length: N }, function () {
           return Math.floor(Math.random() * PALETTE.length);
         });
-        var N_BG = 70;
+        var N_BG = 157;
         var geoBg = createBabyOctopusGeometry(0.11, 8, 7, 6);
         var matBg = new THREE.MeshBasicMaterial({
-          color: 0x7fd8be,
+          color: 0xffffff,
           wireframe: true,
           transparent: true,
-          opacity: 0.13,
+          opacity: 0.12,
         });
         var meshBg = new THREE.InstancedMesh(geoBg, matBg, N_BG);
         meshBg.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
@@ -1068,10 +1071,14 @@
           return 0.12 + Math.random() * 0.45;
         });
         var bgScaleBase = Array.from({ length: N_BG }, function () {
-          return 0.75 + Math.random() * 0.95;
+          // power distribution: many small blobs (matching main particles), fewer large
+          return 0.18 + Math.pow(Math.random(), 1.8) * 1.62;
         });
-        var bgScalePulse = Array.from({ length: N_BG }, function () {
-          return 0.06 + Math.random() * 0.16;
+        var bgScalePulse = Array.from({ length: N_BG }, function (_, i) {
+          return bgScaleBase[i] * (0.04 + Math.random() * 0.1);
+        });
+        var bgColorIdx = Array.from({ length: N_BG }, function () {
+          return Math.floor(Math.random() * PALETTE.length);
         });
         function genLogoApprox(n) {
           var P = [];
@@ -1125,26 +1132,37 @@
           }
           return P;
         }
-        function genBrain(n) {
+        function genGalaxy(n) {
           var P = [];
+          var arms = 4;
           for (var i = 0; i < n; i++) {
-            var s = i < n / 2 ? -1 : 1,
-              theta = Math.random() * Math.PI * 2;
-            var bump =
-              0.13 * Math.sin(theta * 3.5) +
-              0.08 * Math.sin(theta * 7) +
-              0.04 * Math.sin(theta * 13);
-            var r = Math.sqrt(Math.random()),
-              rx = (0.52 + bump) * 1.08,
-              ry = (0.46 + bump) * 0.9;
-            var yMod = Math.sin(theta) > -0.25 ? 1.0 : 0.62;
-            P.push(
-              new THREE.Vector3(
-                s * (0.36 + r * rx * Math.cos(theta)) * 1.75,
-                (r * ry * yMod * Math.sin(theta) + 0.05) * 1.75,
-                (Math.random() - 0.5) * 0.55,
-              ),
-            );
+            var rr = Math.random();
+            var x, y, z;
+
+            if (rr < 0.3) {
+              // Dense central bulge.
+              var coreA = Math.random() * Math.PI * 2;
+              var coreR = Math.pow(Math.random(), 0.45) * 0.36;
+              x = coreR * Math.cos(coreA);
+              y = coreR * Math.sin(coreA);
+              z = (Math.random() - 0.5) * 0.34;
+            } else {
+              // Spiral arms with tighter center and looser outer tails.
+              var arm = Math.floor(Math.random() * arms);
+              var t = Math.pow(Math.random(), 0.72);
+              var radius = 0.25 + t * 1.35;
+              var armAngle = (arm / arms) * Math.PI * 2;
+              var swirl = radius * 2.45;
+              var spread = 0.36 - t * 0.2;
+              var theta = armAngle + swirl + (Math.random() - 0.5) * spread;
+              var jitter = 0.03 + (1 - t) * 0.02;
+              x = radius * Math.cos(theta) + (Math.random() - 0.5) * jitter;
+              y = radius * Math.sin(theta) + (Math.random() - 0.5) * jitter;
+              z = (Math.random() - 0.5) * (0.12 + t * 0.25);
+            }
+
+            y += 0.12 * Math.sin(x * 1.8) * (0.5 + Math.random() * 0.5);
+            P.push(new THREE.Vector3(x * 1.25, y * 1.05, z * 1.55));
           }
           return P;
         }
@@ -1207,7 +1225,7 @@
           return P;
         }
         var LOGO = genLogoApprox(N);
-        var BRAIN = genBrain(N),
+        var GALAXY = genGalaxy(N),
           GLOBE = genGlobe(N);
         var D1 = genDisperse(N),
           D2 = genDisperse(N),
@@ -1254,12 +1272,12 @@
         var STAGES = [
           { s: 0.0, e: 0.08, A: LOGO, B: LOGO, oxA: 1.8, oxB: 1.8 },
           { s: 0.08, e: 0.18, A: LOGO, B: LOGO, oxA: 1.8, oxB: 0.0 },
-          { s: 0.18, e: 0.28, A: LOGO, B: D1, oxA: 0.0, oxB: 0.0 },
-          { s: 0.28, e: 0.42, A: D1, B: BRAIN, oxA: 0.0, oxB: 0.0 },
-          { s: 0.42, e: 0.5, A: BRAIN, B: D2, oxA: 0.0, oxB: 0.0 },
-          { s: 0.5, e: 0.65, A: D2, B: GLOBE, oxA: 0.0, oxB: 0.0 },
-          { s: 0.65, e: 0.75, A: GLOBE, B: D3, oxA: 0.0, oxB: 0.0 },
-          { s: 0.75, e: 0.9, A: D3, B: LOGO, oxA: 0.0, oxB: 0.0 },
+          { s: 0.18, e: 0.3, A: LOGO, B: GALAXY, oxA: 0.0, oxB: 0.0 },
+          { s: 0.3, e: 0.44, A: GALAXY, B: GALAXY, oxA: 0.0, oxB: 0.0 },
+          { s: 0.44, e: 0.52, A: GALAXY, B: D2, oxA: 0.0, oxB: 0.0 },
+          { s: 0.52, e: 0.66, A: D2, B: GLOBE, oxA: 0.0, oxB: 0.0 },
+          { s: 0.66, e: 0.76, A: GLOBE, B: D3, oxA: 0.0, oxB: 0.0 },
+          { s: 0.76, e: 0.9, A: D3, B: LOGO, oxA: 0.0, oxB: 0.0 },
           { s: 0.9, e: 1.0, A: LOGO, B: LOGO, oxA: 0.0, oxB: 0.0 },
         ];
         for (var i = 0; i < N; i++) {
@@ -1341,8 +1359,8 @@
             meshMain.setMatrixAt(i, _m4);
             var base = PALETTE[colorIdx[i]],
               dist = curr[i].length(),
-              brt = Math.max(0.38, 0.96 - dist * 0.022),
-              pulse = 0.78 + 0.22 * Math.sin(sec * 0.28 + ph * 5.1);
+              brt = Math.max(0.72, 1.0 - dist * 0.02),
+              pulse = 0.88 + 0.12 * Math.sin(sec * 0.28 + ph * 5.1);
             _col.copy(base).multiplyScalar(brt * pulse);
             meshMain.setColorAt(i, _col);
           }
@@ -1372,13 +1390,18 @@
             );
             var bgScale =
               bgScaleBase[i] + Math.sin(swirl * 1.8 + ph) * bgScalePulse[i];
-            _scBg.setScalar(Math.max(0.35, bgScale));
+            _scBg.setScalar(Math.max(0.12, bgScale));
             _q.setFromEuler(_eu);
             _m4.compose(_pos, _q, _scBg);
             meshBg.setMatrixAt(i, _m4);
+            var bgBase = PALETTE[bgColorIdx[i]];
+            var bgPulse = 0.78 + 0.22 * Math.sin(swirl * 0.8 + ph * 1.4);
+            _col.copy(bgBase).multiplyScalar(bgPulse);
+            meshBg.setColorAt(i, _col);
           }
           meshBg.instanceMatrix.needsUpdate = true;
-          matBg.opacity = 0.1 + 0.05 * Math.sin(sec * 0.34);
+          if (meshBg.instanceColor) meshBg.instanceColor.needsUpdate = true;
+          matBg.opacity = 0.09 + 0.03 * Math.sin(sec * 0.34);
           renderer.render(scene, camera);
         }
         window.addEventListener("resize", function () {
