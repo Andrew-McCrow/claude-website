@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Octopus AI — AI Automation</title>
+
+<!-- Favicon: try Drive logo, fall back to inline SVG octopus -->
+<link rel="icon" href="https://lh3.googleusercontent.com/d/1l6k5Ftt14xJ4oCWHK6P1B1afzVfJHlup=w64"
+      onerror="this.href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 fill=%22%230d1b2a%22/><circle cx=%2216%22 cy=%2212%22 r=%227%22 fill=%22%237fd8be%22/><path d=%22M8 20 Q7 27 6 32M11 21 Q11 28 11 32M14 22 Q14.5 29 15 32M18 22 Q18.5 29 19 32M21 21 Q22 28 22 32M25 20 Q26 27 27 32%22 stroke=%22%237fd8be%22 stroke-width=%222.8%22 fill=%22none%22 stroke-linecap=%22round%22/></svg>'">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ── Reset ──────────────────────────────── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* ── Base ───────────────────────────────── */
+  body {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #fafaf8;
+    background-color: #0d1b2a;
+    height: 6133px;
+    overflow-x: hidden;
+  }
+
+  /* ── Canvas ─────────────────────────────── */
+  #scene {
+    position: fixed;
+    inset: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+  }
+
+  /* ── Nav ────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 52px;
+    border-bottom: 1px solid rgba(127, 216, 190, 0.07);
+    backdrop-filter: blur(14px);
+    background: rgba(13, 27, 42, 0.72);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .nav-logo img {
+    height: 32px; width: auto; object-fit: contain;
+  }
+  .nav-logo-fallback {
+    display: none;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 17px; font-weight: 700;
+    color: #7fd8be; letter-spacing: -0.01em;
+  }
+  .nav-logo-name {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 17px; font-weight: 700;
+    color: #fafaf8; letter-spacing: -0.01em;
+  }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: 14px; font-weight: 500;
+    color: rgba(250,250,248,0.58);
+    text-decoration: none;
+    transition: color 0.18s;
+  }
+  .nav-links a:hover { color: #fafaf8; }
+
+  /* ── Buttons ────────────────────────────── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 24px;
+    border-radius: 7px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    text-decoration: none; cursor: pointer; border: none;
+    transition: transform 0.14s, opacity 0.14s, box-shadow 0.14s;
+    white-space: nowrap;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+  .btn-primary {
+    background: #7fd8be; color: #0d1b2a;
+  }
+  .btn-primary:hover {
+    opacity: 0.9;
+    box-shadow: 0 0 28px rgba(127, 216, 190, 0.4);
+  }
+  .btn-outline {
+    background: transparent; color: #fafaf8;
+    border: 1px solid rgba(250,250,248,0.22);
+  }
+  .btn-outline:hover { border-color: rgba(127,216,190,0.5); color: #7fd8be; }
+  .btn-lg { padding: 14px 34px; font-size: 15px; }
+
+  /* ── Layout ─────────────────────────────── */
+  .section {
+    position: absolute;
+    width: 100%; z-index: 10;
+    pointer-events: none;
+  }
+  .section > * { pointer-events: all; }
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 52px; }
+
+  /* ── Type ───────────────────────────────── */
+  .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: #7fd8be; margin-bottom: 14px;
+    display: block;
+  }
+  h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: clamp(48px, 5.8vw, 78px);
+    font-weight: 700; line-height: 1.03;
+    letter-spacing: -0.032em; color: #fafaf8;
+    margin-bottom: 22px;
+  }
+  h1 em { font-style: normal; color: #7fd8be; }
+  h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: clamp(30px, 3.2vw, 46px);
+    font-weight: 700; line-height: 1.1;
+    letter-spacing: -0.025em; color: #fafaf8;
+    margin-bottom: 14px;
+  }
+  h3 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px; font-weight: 600;
+    color: #fafaf8; margin-bottom: 10px;
+  }
+  .lead {
+    font-size: clamp(16px, 1.2vw, 19px);
+    color: rgba(250,250,248,0.6);
+    line-height: 1.65; max-width: 500px;
+    margin-bottom: 36px;
+  }
+  p { font-size: 15px; color: rgba(250,250,248,0.58); line-height: 1.7; }
+
+  /* ── Hero ───────────────────────────────── */
+  .hero {
+    min-height: 100vh; display: flex;
+    align-items: center; padding-top: 80px;
+  }
+
+  /* ── Services ───────────────────────────── */
+  .services-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 2px; margin-top: 44px;
+    background: rgba(127,216,190,0.07);
+    border-radius: 14px; overflow: hidden;
+  }
+  .service-card {
+    background: rgba(13,27,42,0.96);
+    padding: 36px 32px;
+    transition: background 0.2s;
+  }
+  .service-card:hover { background: rgba(27,38,59,1); }
+  .svc-icon {
+    width: 40px; height: 40px; margin-bottom: 18px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(127,216,190,0.1);
+    border-radius: 10px; padding: 8px;
+  }
+  .svc-icon svg { width: 22px; height: 22px; }
+  .service-card h3 { font-size: 17px; margin-bottom: 10px; }
+
+  /* ── Steps ──────────────────────────────── */
+  .steps { display: flex; flex-direction: column; gap: 2px; margin-top: 44px; }
+  .step {
+    display: grid; grid-template-columns: 56px 1fr;
+    gap: 28px; align-items: start;
+    padding: 32px 36px;
+    background: rgba(27,38,59,0.55);
+    border-radius: 11px;
+    border: 1px solid rgba(127,216,190,0.07);
+  }
+  .step-num {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 38px; font-weight: 700;
+    color: rgba(127,216,190,0.2); line-height: 1;
+    padding-top: 3px;
+  }
+
+  /* ── Stats ──────────────────────────────── */
+  .stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; margin-top: 44px;
+    background: rgba(127,216,190,0.1);
+    border-radius: 12px; overflow: hidden;
+  }
+  .stat {
+    background: rgba(13,27,42,0.97);
+    padding: 36px 28px; text-align: center;
+  }
+  .stat-num {
+    font-family: 'Open Sans', sans-serif;
+    font-size: clamp(34px, 3vw, 50px);
+    font-weight: 700; color: #7fd8be;
+    line-height: 1; margin-bottom: 10px;
+  }
+  .stat p { font-size: 13px; color: rgba(250,250,248,0.45); }
+
+  /* ── Testimonials ───────────────────────── */
+  .testimonials { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 44px; }
+  .testimonial {
+    padding: 32px;
+    background: rgba(27,38,59,0.65);
+    border-radius: 11px;
+    border: 1px solid rgba(127,216,190,0.09);
+  }
+  .testimonial blockquote {
+    font-family: Georgia, serif; font-style: italic;
+    font-size: 15px; color: rgba(250,250,248,0.72);
+    line-height: 1.7; margin-bottom: 18px;
+  }
+  .t-name { font-size: 13px; font-weight: 600; color: #7fd8be; }
+  .t-role { font-size: 12px; color: rgba(250,250,248,0.36); margin-top: 2px; }
+
+  /* ── Final CTA ──────────────────────────── */
+  .cta-block { text-align: center; padding: 80px 0 40px; }
+  .cta-block h2 { margin-bottom: 16px; }
+  .cta-block p { max-width: 420px; margin: 0 auto 36px; }
+  .cta-sub { font-size: 12px !important; color: rgba(250,250,248,0.28) !important; margin-top: 14px !important; }
+
+  /* ── Footer ─────────────────────────────── */
+  .footer {
+    margin-top: 64px; padding-top: 28px;
+    border-top: 1px solid rgba(127,216,190,0.09);
+    display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 14px;
+  }
+  .footer-brand { display: flex; align-items: center; gap: 9px; }
+  .footer-brand img { height: 24px; object-fit: contain; }
+  .footer-brand span { font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 14px; }
+  .footer-meta { font-size: 12px; color: rgba(250,250,248,0.28); }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-size: 12px; color: rgba(250,250,248,0.36); text-decoration: none; }
+  .footer-links a:hover { color: #7fd8be; }
+
+  /* ── Divider ────────────────────────────── */
+  .rule { height: 1px; background: linear-gradient(90deg, transparent, rgba(127,216,190,0.18), transparent); }
+</style>
+</head>
+<body>
+
+<canvas id="scene"></canvas>
+
+<!-- ── Navigation ───────────────────────── -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="https://lh3.googleusercontent.com/d/1l6k5Ftt14xJ4oCWHK6P1B1afzVfJHlup"
+         alt="Octopus AI"
+         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+    <span class="nav-logo-fallback">🐙</span>
+    <span class="nav-logo-name">Octopus AI</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Process</a></li>
+    <li><a href="#">Results</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+  <a href="#" class="btn btn-primary">Book Call</a>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     §1  HERO  (brain slides right → left)
+     ═══════════════════════════════════════ -->
+<section class="section" style="top: 100px;">
+  <div class="container">
+    <div class="hero">
+      <div style="max-width: 560px;">
+        <h1>Multiply Your<br><em>Workforce.</em></h1>
+        <p class="lead">Custom AI automation systems that eliminate repetitive work, cut costs, and scale output - without scaling headcount.</p>
+        <div style="display:flex; gap:14px; flex-wrap:wrap;">
+          <a href="#" class="btn btn-primary btn-lg">Book Call</a>
+          <a href="#" class="btn btn-outline btn-lg">See Our Work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     §2  SERVICES  (lightbulb ~1800px)
+     ═══════════════════════════════════════ -->
+<section class="section" style="top: 1760px;">
+  <div class="container">
+    <span class="eyebrow">What We Build</span>
+    <h2 style="max-width: 460px;">Custom AI systems built around your business.</h2>
+    <p style="max-width: 500px;">We design, build, and deploy bespoke automation that integrates directly into how you already work.</p>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="svc-icon">
+          <!-- Target / Lead Gen -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+            <line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/>
+            <line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/>
+          </svg>
+        </div>
+        <h3>Lead Generation Systems</h3>
+        <p>AI-powered outbound engines that identify, qualify, and engage ideal customers on autopilot. Your team only talks to warm leads.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="svc-icon">
+          <!-- Zap / Workflow -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
+        <h3>Workflow Automation</h3>
+        <p>Connect your tools, eliminate manual handoffs, and automate the repetitive tasks that drain your team every single day.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="svc-icon">
+          <!-- Bar chart / Sales Admin -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="14"/>
+            <line x1="2" y1="20" x2="22" y2="20"/>
+          </svg>
+        </div>
+        <h3>AI-Powered Sales Admin</h3>
+        <p>Custom CRMs, AI asset generators, and intelligent nurture sequences that keep your pipeline moving without manual touchpoints.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="svc-icon">
+          <!-- Share network / Integrations -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+        </div>
+        <h3>Custom AI Integrations</h3>
+        <p>Deep integrations between your platforms and purpose-built LLM workflows tailored precisely to your operations.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     §3  PROCESS  (globe ~3150px)
+     ═══════════════════════════════════════ -->
+<section class="section" style="top: 3100px;">
+  <div class="container">
+    <span class="eyebrow">How It Works</span>
+    <h2>Live in weeks,<br>not months.</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01</span>
+        <div>
+          <h3>Strategy Call & Audit</h3>
+          <p>A free 30-minute call to map your operations, find the biggest bottlenecks, and identify where automation delivers the highest ROI.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <div>
+          <h3>Custom System Design</h3>
+          <p>We design a tailored automation architecture — the right tools, the right way — mapped precisely to your existing workflow.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <div>
+          <h3>Build, Test & Deploy</h3>
+          <p>Full build, QA, and deployment with documentation and training. A working system, not a recommendations doc.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">04</span>
+        <div>
+          <h3>Iterate & Scale</h3>
+          <p>As you grow, your systems grow. We monitor, refine, and expand capabilities so the automation compounds over time.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     §4  RESULTS + TESTIMONIALS  (~4700px)
+     ═══════════════════════════════════════ -->
+<section class="section" style="top: 4680px;">
+  <div class="container">
+    <span class="eyebrow">Results</span>
+    <h2>Real impact.<br>Measurable returns.</h2>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num">10×</div>
+        <p>Outbound capacity increase within 60 days</p>
+      </div>
+      <div class="stat">
+        <div class="stat-num">40%</div>
+        <p>Average reduction in operational overhead</p>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2 wks</div>
+        <p>Strategy call to first live automation</p>
+      </div>
+    </div>
+    <div class="testimonials">
+      <div class="testimonial">
+        <blockquote>"The system Octopus AI built completely transformed our outreach. We went from 200 manual emails a week to 2,000 personalised sequences — and reply rates went up."</blockquote>
+        <div class="t-name">Sarah K.</div>
+        <div class="t-role">Head of Growth, Series A SaaS</div>
+      </div>
+      <div class="testimonial">
+        <blockquote>"I was sceptical, but the ROI was undeniable within the first month. They built exactly what we needed — nothing bloated, nothing unnecessary."</blockquote>
+        <div class="t-name">James T.</div>
+        <div class="t-role">Founder, Boutique Consulting</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     §5  FINAL CTA + FOOTER  (~5500px)
+     ═══════════════════════════════════════ -->
+<section class="section" style="top: 5480px;">
+  <div class="container">
+    <div class="rule"></div>
+    <div class="cta-block">
+      <span class="eyebrow" style="display:block; text-align:center;">Get Started</span>
+      <h2>Ready to work smarter?</h2>
+      <p>Start with a free strategy call. We'll audit your ops and show you exactly what's possible.</p>
+      <a href="#" class="btn btn-primary btn-lg">Book Call</a>
+      <p class="cta-sub">No commitment. No sales pressure.</p>
+    </div>
+    <div class="footer">
+      <div class="footer-brand">
+        <img src="https://lh3.googleusercontent.com/d/1l6k5Ftt14xJ4oCWHK6P1B1afzVfJHlup" alt="Octopus AI" onerror="this.style.display='none'">
+        <span>Octopus AI</span>
+      </div>
+      <span class="footer-meta">© 2025 Octopus AI · asktheoctopus.com</span>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     Three.js Animation
+     ═══════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  // ── Colours ──────────────────────────────
+  const C_TEAL   = new THREE.Color('#7fd8be');
+  const C_WHITE  = new THREE.Color('#fafaf8');
+  const C_CORAL  = new THREE.Color('#ff6b6b');
+  const C_MID    = new THREE.Color('#3a6b8a');
+  const PALETTE  = [C_TEAL, C_TEAL, C_WHITE, C_TEAL, C_CORAL, C_MID, C_TEAL, C_WHITE];
+  const BG       = 0x0d1b2a;
+
+  // ── Renderer ─────────────────────────────
+  const canvas = document.getElementById('scene');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(BG, 1);
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(BG, 0.038);
+
+  const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.01, 60);
+  camera.position.set(0, 0, 6);
+
+  // ── Lights ───────────────────────────────
+  scene.add(new THREE.AmbientLight(0xffffff, 0.45));
+  const dL1 = new THREE.DirectionalLight(0x7fd8be, 2.2);
+  dL1.position.set(4, 6, 4); scene.add(dL1);
+  const dL2 = new THREE.DirectionalLight(0xffffff, 0.7);
+  dL2.position.set(-5, -2, 2); scene.add(dL2);
+  const dL3 = new THREE.DirectionalLight(0xff6b6b, 0.35);
+  dL3.position.set(0, -6, 0); scene.add(dL3);
+
+  // ══════════════════════════════════════════
+  //  MAIN FORMATION  (1000 pyramids)
+  // ══════════════════════════════════════════
+  const N = 1000;
+  const geoMain = new THREE.ConeGeometry(0.025, 0.060, 4);
+  const matMain = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.18, metalness: 0.62 });
+  const meshMain = new THREE.InstancedMesh(geoMain, matMain, N);
+  meshMain.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+  scene.add(meshMain);
+
+  const curr     = Array.from({ length: N }, () => new THREE.Vector3());
+  const rotOff   = Array.from({ length: N }, () => [Math.random()*6.28, Math.random()*6.28, Math.random()*6.28]);
+  const phases   = Array.from({ length: N }, () => Math.random());
+  const spin     = Array.from({ length: N }, () => 0.22 + Math.random() * 0.7);
+  const colorIdx = Array.from({ length: N }, () => Math.floor(Math.random() * PALETTE.length));
+
+  // ══════════════════════════════════════════
+  //  BACKGROUND GHOST PYRAMIDS  (65 scattered)
+  // ══════════════════════════════════════════
+  const N_BG = 65;
+  const geoBg = new THREE.ConeGeometry(0.10, 0.24, 4);
+  const matBg  = new THREE.MeshBasicMaterial({ color: 0x7fd8be, wireframe: true, transparent: true, opacity: 0.14 });
+  const meshBg = new THREE.InstancedMesh(geoBg, matBg, N_BG);
+  meshBg.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+  scene.add(meshBg);
+
+  // Fixed world positions for bg pyramids — spread over a wide area
+  const bgPos = Array.from({ length: N_BG }, () => new THREE.Vector3(
+    (Math.random() - 0.5) * 18,
+    (Math.random() - 0.5) * 10,
+    -2 + Math.random() * 2.5
+  ));
+  const bgRot = Array.from({ length: N_BG }, () => [Math.random()*6.28, Math.random()*6.28, Math.random()*6.28]);
+  const bgSpn = Array.from({ length: N_BG }, () => (Math.random() - 0.5) * 0.25);
+
+  // ── Shape generators ──────────────────────
+
+  function genBrain(n) {
+    const P = [];
+    for (let i = 0; i < n; i++) {
+      const s = i < n / 2 ? -1 : 1;
+      const theta = Math.random() * Math.PI * 2;
+      const bump = 0.13*Math.sin(theta*3.5) + 0.08*Math.sin(theta*7) + 0.04*Math.sin(theta*13);
+      const r = Math.sqrt(Math.random());
+      const rx = (0.52 + bump) * 1.08, ry = (0.46 + bump) * 0.9;
+      const yMod = Math.sin(theta) > -0.25 ? 1.0 : 0.62;
+      P.push(new THREE.Vector3(
+        s * (0.36 + r * rx * Math.cos(theta)) * 1.75,
+        (r * ry * yMod * Math.sin(theta) + 0.05) * 1.75,
+        (Math.random() - 0.5) * 0.55
+      ));
+    }
+    return P;
+  }
+
+  function genBulb(n) {
+    const P = [];
+    for (let i = 0; i < n; i++) {
+      const rr = Math.random();
+      if (rr < 0.68) {
+        const theta = Math.random() * Math.PI * 2;
+        const r = Math.sqrt(Math.random()) * 0.74;
+        const yMod = 1 - 0.3 * Math.max(0, -Math.sin(theta));
+        P.push(new THREE.Vector3(r * Math.cos(theta)*1.55, (0.28 + r*yMod*Math.sin(theta))*1.55, (Math.random()-0.5)*0.52));
+      } else if (rr < 0.88) {
+        const row = Math.floor(Math.random() * 4);
+        P.push(new THREE.Vector3((Math.random()-0.5)*0.55, (-0.8 + row*0.14)*1.55, (Math.random()-0.5)*0.14));
+      } else {
+        P.push(new THREE.Vector3((Math.random()-0.5)*0.30, -1.45, (Math.random()-0.5)*0.08));
+      }
+    }
+    return P;
+  }
+
+  function genGlobe(n) {
+    const P = [], R = 1.55;
+    for (let i = 0; i < n; i++) {
+      const rr = Math.random();
+      let x, y, z;
+      if (rr < 0.42) {
+        const phi = Math.acos(2*Math.random()-1), theta = Math.random()*Math.PI*2;
+        x = R*Math.sin(phi)*Math.cos(theta); y = R*Math.cos(phi); z = R*Math.sin(phi)*Math.sin(theta)*0.52;
+      } else if (rr < 0.72) {
+        const lat = (Math.floor(Math.random()*5)-2)*0.58, theta = Math.random()*Math.PI*2;
+        const cr = Math.sqrt(Math.max(0, R*R - lat*lat));
+        x = cr*Math.cos(theta); y = lat*1.35; z = cr*Math.sin(theta)*0.52;
+      } else {
+        const theta = Math.floor(Math.random()*6)*Math.PI/3, phi = Math.acos(2*Math.random()-1);
+        x = R*Math.sin(phi)*Math.cos(theta); y = R*Math.cos(phi); z = R*Math.sin(phi)*Math.sin(theta)*0.52;
+      }
+      P.push(new THREE.Vector3(x, y, z));
+    }
+    return P;
+  }
+
+  function genOctopus(n) {
+    // Geometric octopus: oval head + 8 tentacles spreading downward
+    const P = [];
+
+    // ── Head / mantle ──
+    const headN = Math.floor(n * 0.30);
+    for (let i = 0; i < headN; i++) {
+      const theta = Math.random() * Math.PI * 2;
+      const r = Math.sqrt(Math.random());
+      // Slightly pointed at top (mantle shape)
+      const rx = 0.68, ry = 0.78 + 0.12 * Math.sin(theta);
+      P.push(new THREE.Vector3(
+        r * Math.cos(theta) * rx,
+        r * Math.sin(theta) * ry + 0.75,
+        (Math.random() - 0.5) * 0.50
+      ));
+    }
+
+    // ── 8 tentacles ──
+    const TENT = 8;
+    const tentN = n - headN;
+    const perT  = Math.ceil(tentN / TENT);
+
+    for (let t = 0; t < TENT; t++) {
+      // Spread symmetrically from body base, fan ±55° from straight down
+      const tNorm = t / (TENT - 1); // 0 → 1
+      const baseAngle = -Math.PI / 2 + (tNorm - 0.5) * Math.PI * 1.05;
+      const len = 1.30 + (t % 2 === 0 ? 0.18 : 0); // alternating length
+
+      const count = (P.length + perT > n) ? (n - P.length) : perT;
+      for (let j = 0; j < count; j++) {
+        const s = j / perT; // 0 = near body, 1 = tip
+
+        // S-curve: sway opposite sides alternately for visual interest
+        const sway = Math.sin(s * Math.PI * 1.6) * 0.28 * (tNorm < 0.5 ? 1 : -1);
+        const angle = baseAngle + sway;
+        const r = s * len;
+
+        const bx = r * Math.cos(angle);
+        const by = r * Math.sin(angle);
+
+        // Width tapering (thick at base, thin at tip)
+        const w = (Math.random() - 0.5) * (0.11 - s * 0.08);
+
+        P.push(new THREE.Vector3(
+          (bx + w) * 1.15,
+          (by + w * 0.4) * 1.15,
+          (Math.random() - 0.5) * (0.06 + s * 0.28)
+        ));
+      }
+    }
+
+    while (P.length < n) {
+      P.push(new THREE.Vector3((Math.random()-0.5)*0.5, 0.4 + Math.random()*0.7, (Math.random()-0.5)*0.3));
+    }
+    return P;
+  }
+
+  function genDisperse(n) {
+    const P = [];
+    for (let i = 0; i < n; i++) {
+      if (Math.random() < 0.28) {
+        // Fly at / past camera
+        P.push(new THREE.Vector3(
+          (Math.random()-0.5)*5.5,
+          (Math.random()-0.5)*5.5,
+          2.0 + Math.random()*3.5
+        ));
+      } else {
+        const phi = Math.acos(2*Math.random()-1), theta = Math.random()*Math.PI*2;
+        const r = 4 + Math.random()*7;
+        P.push(new THREE.Vector3(
+          r*Math.sin(phi)*Math.cos(theta)*0.46,
+          r*Math.sin(phi)*Math.sin(theta)*0.46,
+          r*Math.cos(phi)*0.30
+        ));
+      }
+    }
+    return P;
+  }
+
+  // Pre-compute all shapes
+  const BRAIN  = genBrain(N);
+  const BULB   = genBulb(N);
+  const GLOBE  = genGlobe(N);
+  const LOGO   = genOctopus(N);
+  const D1 = genDisperse(N), D2 = genDisperse(N), D3 = genDisperse(N);
+
+  // ── Scroll stages ─────────────────────────
+  // oxA/oxB = group X translation
+  const STAGES = [
+    { s:0.00, e:0.14, A:BRAIN, B:BRAIN, oxA: 2.5, oxB:-2.5 }, // brain slides R→L, rotates + grows
+    { s:0.14, e:0.24, A:BRAIN, B:D1,    oxA:-2.5, oxB: 0.0 }, // brain disperses
+    { s:0.24, e:0.40, A:D1,   B:BULB,   oxA: 0.0, oxB: 0.0 }, // lightbulb forms
+    { s:0.40, e:0.50, A:BULB,  B:D2,    oxA: 0.0, oxB: 0.0 }, // bulb disperses
+    { s:0.50, e:0.66, A:D2,   B:GLOBE,  oxA: 0.0, oxB: 0.0 }, // globe forms
+    { s:0.66, e:0.76, A:GLOBE, B:D3,    oxA: 0.0, oxB: 0.0 }, // globe disperses
+    { s:0.76, e:0.92, A:D3,   B:LOGO,   oxA: 0.0, oxB: 0.0 }, // octopus logo forms
+    { s:0.92, e:1.00, A:LOGO,  B:LOGO,  oxA: 0.0, oxB: 0.0 }, // logo holds
+  ];
+
+  // Init: scattered near brain, offset to right
+  for (let i = 0; i < N; i++) {
+    curr[i].copy(BRAIN[i]);
+    curr[i].x += 2.5;
+    curr[i].addScaledVector(
+      new THREE.Vector3(Math.random()-0.5, Math.random()-0.5, Math.random()-0.5).normalize(),
+      1.8 + Math.random()*1.4
+    );
+  }
+
+  // ── Reusables ─────────────────────────────
+  const _m4  = new THREE.Matrix4();
+  const _q   = new THREE.Quaternion();
+  const _pos = new THREE.Vector3();
+  const _sc  = new THREE.Vector3(1,1,1);
+  const _eu  = new THREE.Euler();
+  const _col = new THREE.Color();
+  const _tgt = new THREE.Vector3();
+
+  function easeIO(t) { return t<0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2; }
+  function easeO3(t) { return 1-Math.pow(1-t,3); }
+
+  let sp = 0;
+  window.addEventListener('scroll', () => {
+    const ms = document.documentElement.scrollHeight - window.innerHeight;
+    sp = ms > 0 ? window.scrollY / ms : 0;
+  }, { passive: true });
+
+  // ── Render loop ───────────────────────────
+  function tick(t) {
+    requestAnimationFrame(tick);
+    const sec = t * 0.001;
+
+    // Find current stage
+    let stageIdx = STAGES.length - 1, prog = 1;
+    for (let i = 0; i < STAGES.length; i++) {
+      if (sp >= STAGES[i].s && sp < STAGES[i].e) {
+        stageIdx = i; prog = (sp - STAGES[i].s) / (STAGES[i].e - STAGES[i].s); break;
+      }
+    }
+    const stage = STAGES[stageIdx];
+    const ep = easeIO(prog);
+    const ox = stage.oxA + (stage.oxB - stage.oxA) * ep;
+
+    // ── Group transform (rotation + scale) for brain stage ──
+    // Stage 0: rotate Y + scale swell as brain slides across
+    // Stage 1: fade rotation back out during dispersion
+    let gRotY = 0, gScale = 1.0;
+    if (stageIdx === 0) {
+      gRotY  = ep * 1.5;                              // rotate ~86° total
+      gScale = 0.86 + 0.28 * Math.sin(ep * Math.PI); // swell to 1.14× at centre
+    } else if (stageIdx === 1) {
+      gRotY  = 1.5 * (1 - ep);                        // fade rotation out
+      gScale = 1.0;
+    }
+    const cosR = Math.cos(gRotY), sinR = Math.sin(gRotY);
+
+    // ── Update main formation ──────────────
+    for (let i = 0; i < N; i++) {
+      const ph = phases[i];
+      const localP = Math.max(0, Math.min(1, (prog - ph*0.16) / 0.84));
+      const lp = easeO3(localP);
+
+      _tgt.lerpVectors(stage.A[i], stage.B[i], lp);
+      curr[i].lerp(_tgt, 0.048 + ph*0.022);
+
+      // Apply group rotation + scale around Y axis
+      const rx = curr[i].x * cosR - curr[i].z * sinR;
+      const rz = curr[i].x * sinR + curr[i].z * cosR;
+      _pos.set(rx * gScale + ox, curr[i].y * gScale, rz * gScale);
+
+      // Individual tumble rotation
+      _eu.set(
+        rotOff[i][0] + sec * spin[i] * 0.38,
+        rotOff[i][1] + sec * spin[i] * 0.28,
+        rotOff[i][2] + sec * spin[i] * 0.16
+      );
+      _q.setFromEuler(_eu);
+      _m4.compose(_pos, _q, _sc);
+      meshMain.setMatrixAt(i, _m4);
+
+      // Colour
+      const base = PALETTE[colorIdx[i]];
+      const dist = curr[i].length();
+      const bright = Math.max(0.38, 0.96 - dist * 0.022);
+      const pulse  = 0.78 + 0.22 * Math.sin(sec * 0.28 + ph * 5.1);
+      _col.copy(base).multiplyScalar(bright * pulse);
+      meshMain.setColorAt(i, _col);
+    }
+    meshMain.instanceMatrix.needsUpdate = true;
+    if (meshMain.instanceColor) meshMain.instanceColor.needsUpdate = true;
+
+    // ── Update background ghost pyramids ───
+    for (let i = 0; i < N_BG; i++) {
+      _eu.set(
+        bgRot[i][0] + sec * bgSpn[i],
+        bgRot[i][1] + sec * bgSpn[i] * 0.7,
+        bgRot[i][2] + sec * bgSpn[i] * 0.4
+      );
+      _q.setFromEuler(_eu);
+      _m4.compose(bgPos[i], _q, _sc);
+      meshBg.setMatrixAt(i, _m4);
+    }
+    meshBg.instanceMatrix.needsUpdate = true;
+
+    renderer.render(scene, camera);
+  }
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

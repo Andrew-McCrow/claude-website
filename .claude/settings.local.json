@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:dala.craftedbygc.com)",
+      "WebFetch(domain:docs.google.com)",
+      "WebFetch(domain:drive.google.com)",
+      "WebFetch(domain:doc-04-94-docstext.googleusercontent.com)",
+      "Bash(open /Users/andrewmccrow/repos/claude-website/index.html)",
+      "WebFetch(domain:lh3.googleusercontent.com)"
+    ]
+  }
+}
