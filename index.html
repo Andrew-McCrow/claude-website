@@ -1197,10 +1197,14 @@
               y = r * Math.sin(angle) * (0.85 + Math.random() * 0.3);
               z = (Math.random() - 0.5) * 0.22;
             }
-            // Slight tilt to match reference (viewed ~15deg off top-down)
-            var tiltedY = y * Math.cos(0.26) - z * Math.sin(0.26);
-            var tiltedZ = y * Math.sin(0.26) + z * Math.cos(0.26);
-            P.push(new THREE.Vector3(x * 1.18, tiltedY * 1.18, tiltedZ * 0.7));
+            // Side-on presentation with a diagonal roll so it reads as tilted.
+            var incl = 1.02;
+            var roll = -0.36;
+            var yi = y * Math.cos(incl) - z * Math.sin(incl);
+            var zi = y * Math.sin(incl) + z * Math.cos(incl);
+            var xr = x * Math.cos(roll) - yi * Math.sin(roll);
+            var yr = x * Math.sin(roll) + yi * Math.cos(roll);
+            P.push(new THREE.Vector3(xr * 1.28, yr * 0.98, zi * 0.95));
           }
           return P;
         }
