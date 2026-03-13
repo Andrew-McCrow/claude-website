@@ -177,6 +177,15 @@
       .mobile-menu-cta {
         width: fit-content;
         margin-top: 8px;
+        padding: 11px 24px;
+        min-height: 40px;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.2;
+      }
+      .mobile-menu .mobile-menu-cta,
+      .mobile-menu .mobile-menu-cta:hover {
+        color: #0d1b2a;
       }
       .btn {
         display: inline-flex;
@@ -1006,7 +1015,7 @@
           color: 0xffffff,
           wireframe: true,
           transparent: true,
-          opacity: 0.18,
+          opacity: 0.11,
         });
         var meshMain = new THREE.InstancedMesh(geoMain, matMain, N);
         meshMain.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
@@ -1025,7 +1034,13 @@
           return Math.random();
         });
         var spin = Array.from({ length: N }, function () {
-          return 0.22 + Math.random() * 0.7;
+          return 0.6 + Math.random() * 1.4;
+        });
+        var jiggleAmp = Array.from({ length: N }, function () {
+          return 0.012 + Math.random() * 0.022;
+        });
+        var jiggleFreq = Array.from({ length: N }, function () {
+          return 0.9 + Math.random() * 1.8;
         });
         var colorIdx = Array.from({ length: N }, function () {
           return Math.floor(Math.random() * PALETTE.length);
@@ -1036,7 +1051,7 @@
           color: 0xffffff,
           wireframe: true,
           transparent: true,
-          opacity: 0.12,
+          opacity: 0.07,
         });
         var meshBg = new THREE.InstancedMesh(geoBg, matBg, N_BG);
         meshBg.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
@@ -1056,7 +1071,9 @@
           ];
         });
         var bgSpn = Array.from({ length: N_BG }, function () {
-          return (Math.random() - 0.5) * 0.3;
+          return (
+            (Math.random() - 0.5) * 0.8 + (Math.random() > 0.5 ? 0.4 : -0.4)
+          );
         });
         var bgPhase = Array.from({ length: N_BG }, function () {
           return Math.random() * Math.PI * 2;
@@ -1134,66 +1151,173 @@
         }
         function genGalaxy(n) {
           var P = [];
-          var arms = 4;
+          var arms = 3; // 3 tight spiral arms like the reference
           for (var i = 0; i < n; i++) {
             var rr = Math.random();
             var x, y, z;
-
-            if (rr < 0.3) {
-              // Dense central bulge.
-              var coreA = Math.random() * Math.PI * 2;
-              var coreR = Math.pow(Math.random(), 0.45) * 0.36;
-              x = coreR * Math.cos(coreA);
-              y = coreR * Math.sin(coreA);
-              z = (Math.random() - 0.5) * 0.34;
-            } else {
-              // Spiral arms with tighter center and looser outer tails.
+            if (rr < 0.18) {
+              // Dense bright core — tight gaussian cluster
+              var angle = Math.random() * Math.PI * 2;
+              var r = Math.pow(Math.random(), 0.35) * 0.22;
+              x = r * Math.cos(angle);
+              y = r * Math.sin(angle);
+              z = (Math.random() - 0.5) * 0.06 * (1 - r / 0.22);
+            } else if (rr < 0.82) {
+              // Spiral arms — logarithmic spiral, tightly wound
               var arm = Math.floor(Math.random() * arms);
-              var t = Math.pow(Math.random(), 0.72);
-              var radius = 0.25 + t * 1.35;
+              var t = Math.pow(Math.random(), 0.6); // bias toward outer
+              var r = 0.18 + t * 1.38;
               var armAngle = (arm / arms) * Math.PI * 2;
-              var swirl = radius * 2.45;
-              var spread = 0.36 - t * 0.2;
-              var theta = armAngle + swirl + (Math.random() - 0.5) * spread;
-              var jitter = 0.03 + (1 - t) * 0.02;
-              x = radius * Math.cos(theta) + (Math.random() - 0.5) * jitter;
-              y = radius * Math.sin(theta) + (Math.random() - 0.5) * jitter;
-              z = (Math.random() - 0.5) * (0.12 + t * 0.25);
+              // Winding: ~2.8 * PI over full radius (tight coil)
+              var wind = r * 2.2;
+              var spreadMax = 0.08 + t * 0.13; // arms widen toward edges
+              var spread = (Math.random() - 0.5) * spreadMax * 2;
+              var theta = armAngle + wind + spread;
+              // Arm sub-structure: denser inner ridge + fade
+              var ridgeBias = Math.abs(spread) / spreadMax;
+              var density = 1.0 - ridgeBias * 0.55;
+              x = r * Math.cos(theta);
+              y = r * Math.sin(theta);
+              // Very flat disc; slight warp at edges
+              z = (Math.random() - 0.5) * (0.04 + t * 0.09);
+              // Apply density — skip low-density edge particles
+              if (Math.random() > density) {
+                // Redraw as outer halo scatter instead
+                var hr = 0.9 + Math.random() * 0.75;
+                var ha = Math.random() * Math.PI * 2;
+                x = hr * Math.cos(ha);
+                y = hr * Math.sin(ha);
+                z = (Math.random() - 0.5) * 0.18;
+              }
+            } else {
+              // Outer halo — scattered individual stars
+              var r = 1.15 + Math.pow(Math.random(), 0.7) * 0.85;
+              var angle = Math.random() * Math.PI * 2;
+              x = r * Math.cos(angle) * (0.85 + Math.random() * 0.3);
+              y = r * Math.sin(angle) * (0.85 + Math.random() * 0.3);
+              z = (Math.random() - 0.5) * 0.22;
             }
-
-            y += 0.12 * Math.sin(x * 1.8) * (0.5 + Math.random() * 0.5);
-            P.push(new THREE.Vector3(x * 1.25, y * 1.05, z * 1.55));
+            // Slight tilt to match reference (viewed ~15deg off top-down)
+            var tiltedY = y * Math.cos(0.26) - z * Math.sin(0.26);
+            var tiltedZ = y * Math.sin(0.26) + z * Math.cos(0.26);
+            P.push(new THREE.Vector3(x * 1.18, tiltedY * 1.18, tiltedZ * 0.7));
           }
           return P;
         }
         function genGlobe(n) {
-          var P = [],
-            R = 1.55;
-          for (var i = 0; i < n; i++) {
-            var rr = Math.random(),
-              x,
-              y,
-              z;
-            if (rr < 0.42) {
-              var phi = Math.acos(2 * Math.random() - 1),
-                theta = Math.random() * Math.PI * 2;
-              x = R * Math.sin(phi) * Math.cos(theta);
-              y = R * Math.cos(phi);
-              z = R * Math.sin(phi) * Math.sin(theta) * 0.52;
-            } else if (rr < 0.72) {
-              var lat = (Math.floor(Math.random() * 5) - 2) * 0.58,
-                theta = Math.random() * Math.PI * 2,
-                cr = Math.sqrt(Math.max(0, R * R - lat * lat));
-              x = cr * Math.cos(theta);
-              y = lat * 1.35;
-              z = cr * Math.sin(theta) * 0.52;
-            } else {
-              var theta = (Math.floor(Math.random() * 6) * Math.PI) / 3,
-                phi = Math.acos(2 * Math.random() - 1);
-              x = R * Math.sin(phi) * Math.cos(theta);
-              y = R * Math.cos(phi);
-              z = R * Math.sin(phi) * Math.sin(theta) * 0.52;
+          var size = 640;
+          var c = document.createElement("canvas");
+          c.width = c.height = size;
+          var ctx = c.getContext("2d");
+          var P = [];
+          if (!ctx) {
+            for (var i = 0; i < n; i++) {
+              var a = Math.random() * Math.PI * 2;
+              P.push(
+                new THREE.Vector3(
+                  Math.cos(a) * 1.55,
+                  Math.sin(a) * 1.55,
+                  (Math.random() - 0.5) * 0.08,
+                ),
+              );
             }
+            return P;
+          }
+
+          var cx = size * 0.5;
+          var cy = size * 0.5;
+          var r = size * 0.39;
+
+          ctx.clearRect(0, 0, size, size);
+          ctx.strokeStyle = "#000";
+          ctx.lineWidth = 26;
+          ctx.lineJoin = "round";
+          ctx.lineCap = "round";
+
+          // Outer circle.
+          ctx.beginPath();
+          ctx.arc(cx, cy, r, 0, Math.PI * 2);
+          ctx.stroke();
+
+          // Draw the inner icon lines clipped to the globe edge.
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(cx, cy, r - 1, 0, Math.PI * 2);
+          ctx.clip();
+
+          // Central meridian.
+          ctx.beginPath();
+          ctx.moveTo(cx, cy - r);
+          ctx.lineTo(cx, cy + r);
+          ctx.stroke();
+
+          // Side meridians.
+          ctx.beginPath();
+          ctx.ellipse(cx, cy, r * 0.56, r, 0, 0, Math.PI * 2);
+          ctx.stroke();
+
+          // Equator.
+          ctx.beginPath();
+          ctx.moveTo(cx - r, cy);
+          ctx.lineTo(cx + r, cy);
+          ctx.stroke();
+
+          // Upper and lower latitude bands.
+          ctx.beginPath();
+          ctx.ellipse(cx, cy - r * 0.54, r * 1.02, r * 0.5, 0, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.ellipse(cx, cy + r * 0.66, r * 1.05, r * 0.62, 0, 0, Math.PI * 2);
+          ctx.stroke();
+
+          ctx.restore();
+
+          // Re-stroke border so the outer ring remains crisp.
+          ctx.beginPath();
+          ctx.arc(cx, cy, r, 0, Math.PI * 2);
+          ctx.stroke();
+
+          var data = ctx.getImageData(0, 0, size, size).data;
+          var pix = [];
+          for (var y = 0; y < size; y++) {
+            for (var x = 0; x < size; x++) {
+              var idx = (y * size + x) * 4;
+              if (
+                data[idx + 3] > 100 &&
+                data[idx] < 70 &&
+                data[idx + 1] < 70 &&
+                data[idx + 2] < 70
+              ) {
+                pix.push([x, y]);
+              }
+            }
+          }
+
+          if (pix.length < 20) {
+            for (var i = 0; i < n; i++) {
+              var a = Math.random() * Math.PI * 2;
+              P.push(
+                new THREE.Vector3(
+                  Math.cos(a) * 1.55,
+                  Math.sin(a) * 1.55,
+                  (Math.random() - 0.5) * 0.08,
+                ),
+              );
+            }
+            return P;
+          }
+
+          for (var i = 0; i < n; i++) {
+            var p = pix[Math.floor(Math.random() * pix.length)];
+            var nx = p[0] / size - 0.5;
+            var ny = 0.5 - p[1] / size;
+            var jx = (Math.random() - 0.5) * 0.012;
+            var jy = (Math.random() - 0.5) * 0.012;
+            var rr = Math.sqrt(nx * nx + ny * ny);
+            var x = (nx + jx) * 3.75;
+            var y = (ny + jy) * 3.75;
+            var z =
+              (Math.random() - 0.5) * (0.045 + Math.max(0, (0.5 - rr) * 0.08));
             P.push(new THREE.Vector3(x, y, z));
           }
           return P;
@@ -1332,10 +1456,10 @@
           var gRotY = 0,
             gScale = 1.0;
           if (stageIdx === 0) {
-            gRotY = sec * 0.28;
+            gRotY = 0;
             gScale = 1.4;
           } else if (stageIdx === 1) {
-            gRotY = sec * 0.28 + ep * Math.PI * 2.2;
+            gRotY = ep * Math.PI * 2;
             gScale = 1.4 - ep * 0.4;
           }
           var cosR = Math.cos(gRotY),
@@ -1348,7 +1472,15 @@
             curr[i].lerp(_tgt, 0.048 + ph * 0.022);
             var rx = curr[i].x * cosR - curr[i].z * sinR,
               rz = curr[i].x * sinR + curr[i].z * cosR;
-            _pos.set(rx * gScale + ox, curr[i].y * gScale, rz * gScale);
+            _pos.set(
+              rx * gScale +
+                ox +
+                Math.sin(sec * jiggleFreq[i] + ph * 7.3) * jiggleAmp[i],
+              curr[i].y * gScale +
+                Math.cos(sec * jiggleFreq[i] * 1.3 + ph * 4.1) * jiggleAmp[i],
+              rz * gScale +
+                Math.sin(sec * jiggleFreq[i] * 0.8 + ph * 5.7) * jiggleAmp[i],
+            );
             _eu.set(
               rotOff[i][0] + sec * spin[i] * 0.38,
               rotOff[i][1] + sec * spin[i] * 0.28,
@@ -1401,7 +1533,7 @@
           }
           meshBg.instanceMatrix.needsUpdate = true;
           if (meshBg.instanceColor) meshBg.instanceColor.needsUpdate = true;
-          matBg.opacity = 0.09 + 0.03 * Math.sin(sec * 0.34);
+          matBg.opacity = 0.05 + 0.02 * Math.sin(sec * 0.34);
           renderer.render(scene, camera);
         }
         window.addEventListener("resize", function () {
