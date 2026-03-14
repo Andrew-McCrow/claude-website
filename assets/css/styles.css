@@ -535,6 +535,9 @@ p {
 .contact-shell .section-intro p {
   max-width: 620px;
 }
+.success-actions {
+  margin-top: 20px;
+}
 .contact-form {
   margin-top: 26px;
   display: grid;
