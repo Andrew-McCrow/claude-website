@@ -525,7 +525,12 @@
       canvas.style.transition = "none";
       canvas.style.opacity = "1";
       renderFrame(particles, 0, 1, mode, false);
-      rootElement.classList.remove(TRANSITION_PENDING_CLASS);
+      window.requestAnimationFrame(function () {
+        rootElement.classList.remove(TRANSITION_PENDING_CLASS);
+        start = performance.now();
+        window.requestAnimationFrame(frame);
+      });
+      return;
     } else {
       canvas.style.transition = "";
       canvas.style.opacity = "";

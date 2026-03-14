@@ -6,18 +6,10 @@
     C_CORAL = new THREE.Color("#ff6b6b"),
     C_WARM_WHITE = new THREE.Color("#fafaf8"),
     C_MIDNIGHT_BLUE = new THREE.Color("#1b263b");
-  var PALETTE = [
-    C_PRIMARY_ACCENT,
-    C_PRIMARY_ACCENT,
-    C_PRIMARY_ACCENT,
-    C_WARM_WHITE,
-    C_WARM_WHITE,
-    C_CORAL,
-    C_CORAL,
-    C_SLATE_GRAY,
-    C_PRIMARY_ACCENT,
-    C_WARM_WHITE,
-  ];
+  var PALETTE = [C_PRIMARY_ACCENT, C_CORAL];
+  function pickBlobColorIndex() {
+    return Math.random() < 0.35 ? 1 : 0;
+  }
   var BG = 0x0d1b2a;
   var canvas = document.getElementById("scene");
   var renderer = new THREE.WebGLRenderer({
@@ -122,7 +114,7 @@
     return 0.9 + Math.random() * 1.8;
   });
   var colorIdx = Array.from({ length: N }, function () {
-    return Math.floor(Math.random() * PALETTE.length);
+    return pickBlobColorIndex();
   });
   var N_BG = 157;
   var geoBg = createBabyOctopusGeometry(0.11, 8, 7, 6);
@@ -168,7 +160,7 @@
     return bgScaleBase[i] * (0.04 + Math.random() * 0.1);
   });
   var bgColorIdx = Array.from({ length: N_BG }, function () {
-    return Math.floor(Math.random() * PALETTE.length);
+    return pickBlobColorIndex();
   });
   function genLogoApprox(n) {
     var P = [];

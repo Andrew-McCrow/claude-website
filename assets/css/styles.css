@@ -1,5 +1,6 @@
 html {
   scroll-behavior: smooth;
+  background-color: #0d1b2a;
 }
 :root {
   --nav-height: 78px;
