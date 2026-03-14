@@ -181,14 +181,14 @@ nav {
   max-width: 1120px;
   margin: 0 auto;
 }
-.mobile-menu a {
+.mobile-menu a:not(.mobile-menu-cta) {
   font-size: 15px;
   font-weight: 500;
   color: rgba(250, 250, 248, 0.8);
   text-decoration: none;
   padding: 12px 2px;
 }
-.mobile-menu a:hover {
+.mobile-menu a:not(.mobile-menu-cta):hover {
   color: #7fd8be;
 }
 .mobile-menu-cta {
@@ -202,6 +202,12 @@ nav {
 }
 .mobile-menu .mobile-menu-cta,
 .mobile-menu .mobile-menu-cta:hover {
+  padding: 12px 24px;
+  min-height: 44px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
   color: #0d1b2a;
 }
 .btn {
