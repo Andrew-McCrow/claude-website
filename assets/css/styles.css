@@ -26,6 +26,22 @@ body {
 body.menu-open {
   overflow: hidden;
 }
+body.is-transitioning {
+  cursor: progress;
+}
+.page-transition-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.16s ease;
+}
+body.is-transitioning .page-transition-canvas {
+  opacity: 1;
+}
 #scene {
   position: fixed;
   inset: 0;

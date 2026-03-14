@@ -48,6 +48,14 @@
     window.location.href = mailto;
 
     window.setTimeout(function () {
+      if (
+        window.OctopusPageTransition &&
+        typeof window.OctopusPageTransition.navigate === "function"
+      ) {
+        window.OctopusPageTransition.navigate("success.html");
+        return;
+      }
+
       window.location.href = "success.html";
     }, 900);
   });
