@@ -23,6 +23,18 @@ body {
   overflow-x: hidden;
   padding-top: var(--nav-height);
 }
+html.transition-pending body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1190;
+  background: #0d1b2a;
+  pointer-events: none;
+}
+html.transition-pending body > :not(.page-transition-canvas) {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
 body.menu-open {
   overflow: hidden;
 }

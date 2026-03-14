@@ -11,6 +11,17 @@
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    <script>
+      (function () {
+        try {
+          if (
+            window.sessionStorage.getItem("octopus_page_transition") === "1"
+          ) {
+            document.documentElement.classList.add("transition-pending");
+          }
+        } catch (error) {}
+      })();
+    </script>
     <link rel="stylesheet" href="assets/css/styles.css" />
     <style>
       .terms-main {

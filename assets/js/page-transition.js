@@ -1,16 +1,26 @@
 (function () {
   "use strict";
 
+  var TRANSITION_FLAG_KEY = "octopus_page_transition";
+  var TRANSITION_STATE_KEY = "octopus_page_transition_state";
+  var TRANSITION_PENDING_CLASS = "transition-pending";
+  var rootElement = document.documentElement;
+
   var prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
   ).matches;
 
   if (prefersReducedMotion) {
+    rootElement.classList.remove(TRANSITION_PENDING_CLASS);
+    try {
+      window.sessionStorage.removeItem(TRANSITION_FLAG_KEY);
+      window.sessionStorage.removeItem(TRANSITION_STATE_KEY);
+    } catch (error) {
+      // Ignore session storage errors.
+    }
     return;
   }
 
-  var TRANSITION_FLAG_KEY = "octopus_page_transition";
-  var TRANSITION_STATE_KEY = "octopus_page_transition_state";
   var body = document.body;
 
   if (!body) {
@@ -511,6 +521,16 @@
     var EXIT_HOLD_DURATION = 300;
     var ENTER_DISPERSE_DURATION = 860;
 
+    if (mode === "enter") {
+      canvas.style.transition = "none";
+      canvas.style.opacity = "1";
+      renderFrame(particles, 0, 1, mode, false);
+      rootElement.classList.remove(TRANSITION_PENDING_CLASS);
+    } else {
+      canvas.style.transition = "";
+      canvas.style.opacity = "";
+    }
+
     function frame(now) {
       var elapsed = now - start;
 
@@ -548,6 +568,8 @@
 
       body.classList.remove("is-transitioning");
       context.clearRect(0, 0, width, height);
+      canvas.style.opacity = "";
+      canvas.style.transition = "";
 
       if (typeof onDone === "function") {
         onDone();
@@ -683,6 +705,7 @@
     inProgress = true;
     runTransition("enter");
   } else {
+    rootElement.classList.remove(TRANSITION_PENDING_CLASS);
     try {
       window.sessionStorage.removeItem(TRANSITION_STATE_KEY);
     } catch (error) {
