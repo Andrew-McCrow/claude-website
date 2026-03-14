@@ -40,17 +40,19 @@
             window.OctopusPageTransition &&
             typeof window.OctopusPageTransition.navigate === "function"
           ) {
-            window.OctopusPageTransition.navigate("success.html");
+            window.OctopusPageTransition.navigate("/success");
           } else {
-            window.location.href = "success.html";
+            window.location.href = "/success";
           }
         } else {
           return response.json().then(function (data) {
             var msg =
               data && data.errors
-                ? data.errors.map(function (e) {
-                    return e.message;
-                  }).join(", ")
+                ? data.errors
+                    .map(function (e) {
+                      return e.message;
+                    })
+                    .join(", ")
                 : "Something went wrong. Please try again.";
             alert(msg);
             if (submitBtn) {
@@ -61,7 +63,9 @@
         }
       })
       .catch(function () {
-        alert("Something went wrong. Please check your connection and try again.");
+        alert(
+          "Something went wrong. Please check your connection and try again.",
+        );
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.textContent = "Submit";
