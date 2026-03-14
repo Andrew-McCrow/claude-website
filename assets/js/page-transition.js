@@ -310,7 +310,7 @@
         sy: start.y,
         ex: end.x,
         ey: end.y,
-        size: 0.85 + Math.random() * 1.8,
+        size: 2.5 + Math.random() * 3.0,
         colorIndex: Math.floor(Math.random() * TRANSITION_PALETTE.length),
         drift: drift,
         phase: phase,
@@ -370,7 +370,7 @@
     return storedState.map(function (entry) {
       var sx = clamp(Number(entry[0]), -1, 2) * width;
       var sy = clamp(Number(entry[1]), -1, 2) * height;
-      var size = clamp(Number(entry[2]) || 1, 0.45, 3.8);
+      var size = clamp(Number(entry[2]) || 2.5, 0.5, 6);
       var colorIndex =
         Math.abs(parseInt(entry[3], 10) || 0) % TRANSITION_PALETTE.length;
       var drift = clamp(Number(entry[4]) || 0.7, 0.2, 2.2);
@@ -405,6 +405,45 @@
     );
   }
 
+  // Draw an octopus-shaped blob matching createBabyOctopusGeometry projected to 2D.
+  // `angle` rotates the blob around its centre for variety (matches scene.js spin).
+  function octopusBlobPath(cx, cy, r, angle) {
+    var TENTACLES = 6;
+    var STEPS = 24;
+    var ca = Math.cos(angle);
+    var sa = Math.sin(angle);
+    context.beginPath();
+    for (var i = 0; i <= STEPS; i++) {
+      var a = (i / STEPS) * Math.PI * 2;
+      var nx = Math.cos(a);
+      var ny = Math.sin(a); // world-space y: +1 = up
+      var px, py;
+      if (ny > 0) {
+        // Top half: narrower width, taller head (mirrors y*=1.22, x/z*=0.92)
+        px = nx * 0.92;
+        py = ny * 1.22;
+      } else if (ny < -0.08) {
+        // Bottom half: 6 tentacle lobes + downward shift
+        var depth = Math.min(1, (-ny - 0.08) / 0.92);
+        var lobe = 1 + 0.22 * Math.cos(a * TENTACLES) * depth;
+        px = nx * lobe;
+        py = ny * lobe - 0.34 * depth * depth;
+      } else {
+        // Equator band
+        px = nx * 0.94;
+        py = ny;
+      }
+      // Rotate around blob centre then project (canvas y is flipped)
+      var rx = px * ca - py * sa;
+      var ry = px * sa + py * ca;
+      var sx = cx + rx * r;
+      var sy = cy - ry * r;
+      if (i === 0) context.moveTo(sx, sy);
+      else context.lineTo(sx, sy);
+    }
+    context.closePath();
+  }
+
   function renderFrame(
     particles,
     movementProgress,
@@ -416,46 +455,14 @@
       mode === "exit"
         ? easeOutCubic(movementProgress)
         : easeInOutCubic(movementProgress);
-    var centerX = width * 0.5;
-    var centerY = height * 0.48;
-
     context.clearRect(0, 0, width, height);
 
     var clampedOverlayAlpha = clamp(overlayAlpha, 0, 1);
     context.fillStyle = "rgba(13, 27, 42, " + clampedOverlayAlpha + ")";
     context.fillRect(0, 0, width, height);
 
-    var glowStrength = holdLogo ? 0 : mode === "exit" ? eased : 1 - eased;
-    var glow = context.createRadialGradient(
-      centerX,
-      centerY,
-      0,
-      centerX,
-      centerY,
-      Math.min(width, height) * 0.34,
-    );
-    glow.addColorStop(0, "rgba(127, 216, 190, " + 0.16 * glowStrength + ")");
-    glow.addColorStop(1, "rgba(127, 216, 190, 0)");
-    context.fillStyle = glow;
-    context.fillRect(0, 0, width, height);
-
-    var coralGlow = context.createRadialGradient(
-      centerX,
-      centerY,
-      0,
-      centerX,
-      centerY,
-      Math.min(width, height) * 0.5,
-    );
-    coralGlow.addColorStop(
-      0,
-      "rgba(255, 107, 107, " + 0.06 * glowStrength + ")",
-    );
-    coralGlow.addColorStop(1, "rgba(255, 107, 107, 0)");
-    context.fillStyle = coralGlow;
-    context.fillRect(0, 0, width, height);
-
     var wobbleBase = holdLogo ? 0 : (mode === "exit" ? 1 - eased : eased) * 4.8;
+    var now = performance.now() * 0.001; // seconds for continuous spin
 
     for (var i = 0; i < particles.length; i++) {
       var particle = particles[i];
@@ -485,24 +492,21 @@
         radius = particle.size * 1.06;
       }
 
-      var fillAlpha = alpha * 0.16;
+      // Wireframe-style: very faint fill, visible stroke (matches scene.js MeshBasicMaterial wireframe)
+      var fillAlpha = alpha * 0.06;
       var lineWidth = holdLogo
-        ? 0.86
+        ? 0.7
         : mode === "exit"
-          ? 0.7 + eased * 0.35
-          : 0.6 + (1 - eased) * 0.28;
+          ? 0.55 + eased * 0.25
+          : 0.5 + (1 - eased) * 0.2;
 
-      context.fillStyle = colorForIndex(
-        particle.colorIndex,
-        fillAlpha.toFixed(3),
-      );
-      context.strokeStyle = colorForIndex(
-        particle.colorIndex,
-        alpha.toFixed(3),
-      );
+      // Continuous spin matching scene.js spin rates (0.38/0.28/0.16 multipliers)
+      var blobAngle = particle.phase + now * (0.38 + particle.drift * 0.22);
+
+      context.fillStyle = colorForIndex(particle.colorIndex, fillAlpha.toFixed(3));
+      context.strokeStyle = colorForIndex(particle.colorIndex, alpha.toFixed(3));
       context.lineWidth = lineWidth;
-      context.beginPath();
-      context.arc(x, y, radius, 0, Math.PI * 2);
+      octopusBlobPath(x, y, radius, blobAngle);
       context.fill();
       context.stroke();
     }
@@ -517,9 +521,9 @@
         ? buildParticlesFromStoredState(storedState)
         : buildParticles(mode);
     var start = performance.now();
-    var EXIT_FORM_DURATION = 980;
+    var EXIT_FORM_DURATION = 500;
     var EXIT_HOLD_DURATION = 300;
-    var ENTER_DISPERSE_DURATION = 860;
+    var ENTER_DISPERSE_DURATION = 500;
 
     if (mode === "enter") {
       canvas.style.transition = "none";
