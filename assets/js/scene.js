@@ -454,7 +454,11 @@
     _scBg = new THREE.Vector3(1, 1, 1),
     _eu = new THREE.Euler(),
     _col = new THREE.Color(),
-    _tgt = new THREE.Vector3();
+    _tgt = new THREE.Vector3(),
+    _hoverTargetNdc = new THREE.Vector2(3, 3),
+    _hoverNdc = new THREE.Vector2(3, 3),
+    _hoverPt = new THREE.Vector3(),
+    _hoverRay = new THREE.Vector3();
   function easeIO(t) {
     return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   }
@@ -470,6 +474,27 @@
     },
     { passive: true },
   );
+  var hoverOn = false,
+    hoverMix = 0,
+    hoverRadius = 0.95,
+    hoverRadiusSq = hoverRadius * hoverRadius,
+    hoverLift = 0.62,
+    hoverPull = 0.08,
+    hoverScale = 0.34;
+  window.addEventListener("pointermove", function (e) {
+    if (e.pointerType && e.pointerType !== "mouse") return;
+    _hoverTargetNdc.set(
+      (e.clientX / window.innerWidth) * 2 - 1,
+      -(e.clientY / window.innerHeight) * 2 + 1,
+    );
+    hoverOn = true;
+  });
+  canvas.addEventListener("pointerleave", function () {
+    hoverOn = false;
+  });
+  window.addEventListener("blur", function () {
+    hoverOn = false;
+  });
   function tick(t) {
     requestAnimationFrame(tick);
     var sec = t * 0.001;
@@ -484,6 +509,19 @@
     }
     var stage = STAGES[stageIdx],
       ep = easeIO(prog);
+    var hoverShapeActive =
+      stage.A === stage.B &&
+      (stage.A === LOGO || stage.A === GALAXY || stage.A === GLOBE);
+    hoverMix += ((hoverOn && hoverShapeActive ? 1 : 0) - hoverMix) * 0.12;
+    if (hoverMix > 0.001) {
+      _hoverNdc.lerp(_hoverTargetNdc, 0.24);
+      _hoverPt.set(_hoverNdc.x, _hoverNdc.y, 0.5).unproject(camera);
+      _hoverRay.copy(_hoverPt).sub(camera.position);
+      if (Math.abs(_hoverRay.z) > 1e-5) {
+        var tHit = -camera.position.z / _hoverRay.z;
+        _hoverPt.copy(camera.position).addScaledVector(_hoverRay, tHit);
+      }
+    }
     var ox = stage.oxA + (stage.oxB - stage.oxA) * ep;
     var oy = (stage.oyA || 0) + ((stage.oyB || 0) - (stage.oyA || 0)) * ep;
     var gRotY = 0,
@@ -518,12 +556,27 @@
         rz * gScale +
           Math.sin(sec * jiggleFreq[i] * 0.8 + ph * 5.7) * jiggleAmp[i],
       );
+      var blobScale = 1;
+      if (hoverMix > 0.001) {
+        var hx = _pos.x - _hoverPt.x;
+        var hy = _pos.y - _hoverPt.y;
+        var hd2 = hx * hx + hy * hy;
+        if (hd2 < hoverRadiusSq) {
+          var h = 1 - Math.sqrt(hd2) / hoverRadius;
+          h = h * h * (3 - 2 * h);
+          _pos.z += h * hoverMix * hoverLift;
+          _pos.x -= hx * h * hoverMix * hoverPull;
+          _pos.y -= hy * h * hoverMix * hoverPull;
+          blobScale += h * hoverMix * hoverScale;
+        }
+      }
       _eu.set(
         rotOff[i][0] + sec * spin[i] * 0.38,
         rotOff[i][1] + sec * spin[i] * 0.28,
         rotOff[i][2] + sec * spin[i] * 0.16,
       );
       _q.setFromEuler(_eu);
+      _scMain.setScalar(blobScale);
       _m4.compose(_pos, _q, _scMain);
       meshMain.setMatrixAt(i, _m4);
       var base = PALETTE[colorIdx[i]],
