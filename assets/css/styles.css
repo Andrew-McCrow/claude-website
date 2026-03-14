@@ -546,7 +546,10 @@ p {
   z-index: 10;
 }
 .contact-section {
-  padding: clamp(56px, 7vw, 88px) 0 var(--section-space);
+  padding: clamp(80px, 10vw, 120px) 0 var(--section-space);
+}
+.contact-section:first-of-type {
+  padding-top: clamp(28px, 5vw, 56px);
 }
 .contact-shell {
   max-width: 840px;
