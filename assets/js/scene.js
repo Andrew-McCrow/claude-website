@@ -256,9 +256,9 @@
         y = r * Math.sin(angle) * (0.85 + Math.random() * 0.3);
         z = (Math.random() - 0.5) * 0.22;
       }
-      // Side-on presentation with a diagonal roll so it reads as tilted.
-      var incl = 1.02;
-      var roll = -0.36;
+      // Nearly edge-on: disc in XZ plane, spin axis pointing up (+Y). Long X, short Y.
+      var incl = -1.38;
+      var roll = 0.05;
       var yi = y * Math.cos(incl) - z * Math.sin(incl);
       var zi = y * Math.sin(incl) + z * Math.cos(incl);
       var xr = x * Math.cos(roll) - yi * Math.sin(roll);
@@ -524,9 +524,28 @@
     } else if (stageIdx === 1) {
       gRotY = ep * Math.PI * 2;
       gScale = 1.4 - ep * 0.4;
+    } else if (stageIdx === 6 || stageIdx === 7) {
+      // Globe rotates around its Y axis (pole) as user scrolls through 0.52–0.73
+      var globeScrollProgress = Math.max(0, Math.min(1, (sp - 0.52) / (0.73 - 0.52)));
+      gRotY = globeScrollProgress * Math.PI * 2;
     }
     var cosR = Math.cos(gRotY),
       sinR = Math.sin(gRotY);
+    // Galaxy disc spin axis derived from genGalaxy's incl=-1.38, roll=0.05 transforms on Z axis,
+    // then scaled by (1.28, 0.98, 0.95) — this is the galactic pole direction in world space.
+    var GNX = -0.064, GNY = 0.979, GNZ = 0.193;
+    var useGalaxyAxisRot = (stageIdx === 3 || stageIdx === 4);
+    var gm00 = 1, gm01 = 0, gm02 = 0,
+        gm10 = 0, gm11 = 1, gm12 = 0,
+        gm20 = 0, gm21 = 0, gm22 = 1;
+    if (useGalaxyAxisRot) {
+      var gsp = Math.max(0, Math.min(1, (sp - 0.24) / (0.44 - 0.24)));
+      var ga = gsp * Math.PI * 2;
+      var gc = Math.cos(ga), gs = Math.sin(ga), gt = 1 - gc;
+      gm00 = gt*GNX*GNX + gc;      gm01 = gt*GNX*GNY - gs*GNZ; gm02 = gt*GNX*GNZ + gs*GNY;
+      gm10 = gt*GNX*GNY + gs*GNZ;  gm11 = gt*GNY*GNY + gc;      gm12 = gt*GNY*GNZ - gs*GNX;
+      gm20 = gt*GNX*GNZ - gs*GNY;  gm21 = gt*GNY*GNZ + gs*GNX;  gm22 = gt*GNZ*GNZ + gc;
+    }
     for (var i = 0; i < N; i++) {
       var ph = phases[i],
         localP = Math.max(0, Math.min(1, (prog - ph * 0.16) / 0.84)),
@@ -536,16 +555,25 @@
         _tgt,
         Math.min(0.28, (0.048 + ph * 0.022) * (stage.spd || 1)),
       );
-      var rx = curr[i].x * cosR - curr[i].z * sinR,
-        rz = curr[i].x * sinR + curr[i].z * cosR;
+      var rpx, rpy, rpz;
+      if (useGalaxyAxisRot) {
+        var cx = curr[i].x, cy = curr[i].y, cz = curr[i].z;
+        rpx = gm00*cx + gm01*cy + gm02*cz;
+        rpy = gm10*cx + gm11*cy + gm12*cz;
+        rpz = gm20*cx + gm21*cy + gm22*cz;
+      } else {
+        rpx = curr[i].x * cosR - curr[i].z * sinR;
+        rpy = curr[i].y;
+        rpz = curr[i].x * sinR + curr[i].z * cosR;
+      }
       _pos.set(
-        rx * gScale +
+        rpx * gScale +
           ox +
           Math.sin(sec * jiggleFreq[i] + ph * 7.3) * jiggleAmp[i],
-        curr[i].y * gScale +
+        rpy * gScale +
           oy +
           Math.cos(sec * jiggleFreq[i] * 1.3 + ph * 4.1) * jiggleAmp[i],
-        rz * gScale +
+        rpz * gScale +
           Math.sin(sec * jiggleFreq[i] * 0.8 + ph * 5.7) * jiggleAmp[i],
       );
       var blobScale = 1;
