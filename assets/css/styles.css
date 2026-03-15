@@ -878,6 +878,109 @@ p {
 
 
 /* ==========================================================================
+   Contact Page — h1 scoped to match section heading size
+   ========================================================================== */
+
+.contact-shell h1 {
+  font-size: clamp(28px, 3vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin-bottom: 14px;
+}
+
+
+/* ==========================================================================
+   Terms / Privacy Pages
+   ========================================================================== */
+
+.terms-main {
+  position: relative;
+  z-index: 10;
+}
+
+.terms-wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 36px 24px 72px;
+}
+
+.terms-content h1 {
+  margin: 0;
+  font-size: clamp(30px, 4.6vw, 46px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.terms-content .meta {
+  margin: 10px 0 28px;
+  color: rgba(250, 250, 248, 0.68);
+  font-size: 14px;
+}
+
+.terms-content section {
+  margin-top: 24px;
+}
+
+.terms-content h2 {
+  margin: 0 0 8px;
+  font-size: clamp(20px, 2.6vw, 26px);
+  line-height: 1.2;
+}
+
+.terms-content h3 {
+  margin: 14px 0 6px;
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.terms-content p {
+  margin: 0;
+  color: rgba(250, 250, 248, 0.88);
+}
+
+.terms-content p + p {
+  margin-top: 10px;
+}
+
+.terms-content ul {
+  margin: 10px 0 0 22px;
+  padding: 0;
+}
+
+.terms-content li {
+  margin: 6px 0;
+  color: rgba(250, 250, 248, 0.88);
+}
+
+.terms-content a {
+  color: var(--color-accent);
+}
+
+.terms-footer-wrap {
+  margin-top: 56px;
+}
+
+
+/* ==========================================================================
+   Form Error Messages
+   ========================================================================== */
+
+.form-error {
+  font-size: 13px;
+  color: #ff6b6b;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 107, 107, 0.08);
+  display: none;
+}
+
+.form-error.visible {
+  display: block;
+}
+
+
+/* ==========================================================================
    Responsive — Tablet  (≤ 768px)
    ========================================================================== */
 
@@ -945,6 +1048,10 @@ p {
   .contact-row {
     grid-template-columns: 1fr;
   }
+
+  .terms-wrap {
+    padding: 30px 24px 64px;
+  }
 }
 
 
@@ -965,5 +1072,9 @@ p {
 
   .step-num {
     font-size: 28px;
+  }
+
+  .terms-wrap {
+    padding: 24px 20px 56px;
   }
 }

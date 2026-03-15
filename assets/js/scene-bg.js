@@ -164,5 +164,9 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
-  requestAnimationFrame(tick);
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    renderer.render(scene, camera);
+  } else {
+    requestAnimationFrame(tick);
+  }
 })();
