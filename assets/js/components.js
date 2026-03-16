@@ -14,40 +14,40 @@
   // -------------------------------------------------------------------------
 
   var NAV_HTML = [
-    '<nav>',
+    "<nav>",
     '  <a href="index.html#top" class="nav-logo">',
     '    <img src="public/Logos/Logo - Primary Accent.png" alt="Octopus AI" />',
     '    <span class="nav-logo-name">Octopus AI</span>',
-    '  </a>',
+    "  </a>",
     '  <ul class="nav-links">',
     '    <li><a href="index.html#what">What</a></li>',
     '    <li><a href="index.html#how">How</a></li>',
     '    <li><a href="index.html#results">Results</a></li>',
-    '  </ul>',
+    "  </ul>",
     '  <div class="nav-actions">',
     '    <a href="contact.html" class="btn btn-primary nav-cta">Book Call</a>',
-    '    <button',
+    "    <button",
     '      class="menu-toggle"',
     '      type="button"',
     '      aria-label="Toggle navigation"',
     '      aria-expanded="false"',
     '      aria-controls="mobile-menu"',
-    '    >',
-    '      <span></span>',
-    '      <span></span>',
-    '      <span></span>',
-    '    </button>',
-    '  </div>',
-    '</nav>',
+    "    >",
+    "      <span></span>",
+    "      <span></span>",
+    "      <span></span>",
+    "    </button>",
+    "  </div>",
+    "</nav>",
     '<div id="mobile-menu" class="mobile-menu" hidden>',
     '  <div class="mobile-menu-inner">',
     '    <a href="index.html#what">What</a>',
     '    <a href="index.html#how">How</a>',
     '    <a href="index.html#results">Results</a>',
     '    <a href="contact.html" class="btn btn-primary mobile-menu-cta">Book Call</a>',
-    '  </div>',
-    '</div>',
-  ].join('\n');
+    "  </div>",
+    "</div>",
+  ].join("\n");
 
   // -------------------------------------------------------------------------
   // Footer
@@ -56,27 +56,29 @@
   var FOOTER_HTML = [
     '<div class="footer">',
     '  <div class="footer-brand">',
-    '    <img src="public/Logos/Logo - Primary Accent.png" alt="Octopus AI" />',
-    '    <span>Octopus AI</span>',
-    '  </div>',
+    '    <a href="index.html#top" aria-label="Go to homepage">',
+    '      <img src="public/Logos/Logo - Primary Accent.png" alt="Octopus AI" />',
+    "    </a>",
+    "    <span>Octopus AI</span>",
+    "  </div>",
     '  <span class="footer-meta">&copy; 2026 Octopus AI &middot; asktheoctopus.com</span>',
     '  <div class="footer-links">',
     '    <a href="privacy-policy.html">Privacy</a>',
     '    <a href="terms-of-use.html">Terms</a>',
-    '  </div>',
-    '</div>',
-  ].join('\n');
+    "  </div>",
+    "</div>",
+  ].join("\n");
 
   // -------------------------------------------------------------------------
   // Inject into placeholders
   // -------------------------------------------------------------------------
 
-  var navPlaceholder = document.getElementById('nav-placeholder');
+  var navPlaceholder = document.getElementById("nav-placeholder");
   if (navPlaceholder) {
     navPlaceholder.outerHTML = NAV_HTML;
   }
 
-  var footerPlaceholder = document.getElementById('footer-placeholder');
+  var footerPlaceholder = document.getElementById("footer-placeholder");
   if (footerPlaceholder) {
     footerPlaceholder.outerHTML = FOOTER_HTML;
   }

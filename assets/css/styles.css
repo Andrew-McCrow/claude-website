@@ -4,35 +4,34 @@
 
 :root {
   /* Brand colours */
-  --color-bg:     #0d1b2a;
-  --color-text:   #fafaf8;
+  --color-bg: #0d1b2a;
+  --color-text: #fafaf8;
   --color-accent: #7fd8be;
 
   /* Semi-transparent surface overlays */
-  --surface-card:       rgba(13, 27, 42, 0.86);
+  --surface-card: rgba(13, 27, 42, 0.86);
   --surface-card-hover: rgba(27, 38, 59, 1);
-  --surface-nav:        rgba(13, 27, 42, 0.75);
+  --surface-nav: rgba(13, 27, 42, 0.75);
   --surface-mobile-menu: rgba(13, 27, 42, 0.92);
   --surface-testimonial: rgba(27, 38, 59, 0.65);
-  --surface-input:      rgba(13, 27, 42, 0.75);
-  --surface-contact:    rgba(13, 27, 42, 0.95);
+  --surface-input: rgba(13, 27, 42, 0.75);
+  --surface-contact: rgba(13, 27, 42, 0.95);
 
   /* Borders */
-  --border-faint:   rgba(127, 216, 190, 0.07);
-  --border-subtle:  rgba(127, 216, 190, 0.09);
+  --border-faint: rgba(127, 216, 190, 0.07);
+  --border-subtle: rgba(127, 216, 190, 0.09);
   --border-default: rgba(127, 216, 190, 0.1);
-  --border-input:   rgba(127, 216, 190, 0.18);
-  --border-focus:   rgba(127, 216, 190, 0.62);
+  --border-input: rgba(127, 216, 190, 0.18);
+  --border-focus: rgba(127, 216, 190, 0.62);
 
   /* Typography */
-  --font-body:    "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
   --font-display: "Open Sans", sans-serif;
 
   /* Layout */
-  --nav-height:    78px;
+  --nav-height: 78px;
   --section-space: clamp(72px, 9vw, 112px);
 }
-
 
 /* ==========================================================================
    Reset & Base
@@ -70,7 +69,6 @@ body {
 body.menu-open {
   overflow: hidden;
 }
-
 
 /* ==========================================================================
    Page Transitions
@@ -113,7 +111,6 @@ html.transition-pending body > :not(.page-transition-canvas) {
   pointer-events: none !important;
 }
 
-
 /* ==========================================================================
    Background Scene
    Three.js canvas rendered behind all page content
@@ -131,7 +128,6 @@ main {
   position: relative;
   z-index: 10;
 }
-
 
 /* ==========================================================================
    Navigation
@@ -241,7 +237,6 @@ nav {
   transform: translateY(-6px) rotate(-45deg);
 }
 
-
 /* ==========================================================================
    Mobile Menu
    Slides down from below the nav bar on small screens
@@ -304,7 +299,6 @@ nav {
   color: var(--color-bg); /* dark text on teal button */
 }
 
-
 /* ==========================================================================
    Buttons
    ========================================================================== */
@@ -328,8 +322,12 @@ nav {
   white-space: nowrap;
 }
 
-.btn:hover  { transform: translateY(-1px); }
-.btn:active { transform: translateY(0); }
+.btn:hover {
+  transform: translateY(-1px);
+}
+.btn:active {
+  transform: translateY(0);
+}
 
 /* Filled teal */
 .btn-primary {
@@ -359,7 +357,6 @@ nav {
   padding: 14px 34px;
   font-size: 15px;
 }
-
 
 /* ==========================================================================
    Layout Primitives
@@ -408,11 +405,16 @@ section[id] {
 }
 
 /* Utility width caps */
-.max-w-460 { max-width: 460px; }
-.max-w-500 { max-width: 500px; }
+.max-w-460 {
+  max-width: 460px;
+}
+.max-w-500 {
+  max-width: 500px;
+}
 
-.text-center { text-align: center; }
-
+.text-center {
+  text-align: center;
+}
 
 /* ==========================================================================
    Typography
@@ -492,7 +494,6 @@ p {
   margin-bottom: 0;
 }
 
-
 /* ==========================================================================
    Hero Section
    ========================================================================== */
@@ -514,7 +515,6 @@ p {
   gap: 14px;
   flex-wrap: wrap;
 }
-
 
 /* ==========================================================================
    Services Grid  (#what)
@@ -564,7 +564,6 @@ p {
   margin-bottom: 10px;
 }
 
-
 /* ==========================================================================
    Process Steps  (#how)
    Numbered step-by-step list
@@ -597,7 +596,6 @@ p {
   line-height: 1;
   padding-top: 3px;
 }
-
 
 /* ==========================================================================
    Stats  (#results)
@@ -633,7 +631,6 @@ p {
   font-size: 13px;
   color: rgba(250, 250, 248, 0.45);
 }
-
 
 /* ==========================================================================
    Testimonials
@@ -675,7 +672,6 @@ p {
   margin-top: 2px;
 }
 
-
 /* ==========================================================================
    CTA Block  (#about)
    Centred call-to-action card above the footer
@@ -708,7 +704,6 @@ p {
   margin-top: 14px !important;
 }
 
-
 /* ==========================================================================
    Footer
    ========================================================================== */
@@ -728,6 +723,12 @@ p {
   display: flex;
   align-items: center;
   gap: 9px;
+}
+
+.footer-brand a {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
 }
 
 .footer-brand img {
@@ -760,7 +761,6 @@ p {
 .footer-links a:hover {
   color: var(--color-accent);
 }
-
 
 /* ==========================================================================
    Contact Page
@@ -876,7 +876,6 @@ p {
   display: none !important;
 }
 
-
 /* ==========================================================================
    Contact Page — h1 scoped to match section heading size
    ========================================================================== */
@@ -887,7 +886,6 @@ p {
   letter-spacing: -0.025em;
   margin-bottom: 14px;
 }
-
 
 /* ==========================================================================
    Terms / Privacy Pages
@@ -960,7 +958,6 @@ p {
   margin-top: 56px;
 }
 
-
 /* ==========================================================================
    Form Error Messages
    ========================================================================== */
@@ -979,14 +976,13 @@ p {
   display: block;
 }
 
-
 /* ==========================================================================
    Responsive — Tablet  (≤ 768px)
    ========================================================================== */
 
 @media (max-width: 768px) {
   :root {
-    --nav-height:    72px;
+    --nav-height: 72px;
     --section-space: 64px;
   }
 
@@ -1054,14 +1050,13 @@ p {
   }
 }
 
-
 /* ==========================================================================
    Responsive — Mobile  (≤ 480px)
    ========================================================================== */
 
 @media (max-width: 480px) {
   :root {
-    --nav-height:    68px;
+    --nav-height: 68px;
     --section-space: 56px;
   }
 
