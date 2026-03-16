@@ -728,7 +728,10 @@ p {
 .footer-brand a {
   display: inline-flex;
   align-items: center;
-  line-height: 0;
+  gap: 9px;
+  line-height: 1;
+  text-decoration: none;
+  color: inherit;
 }
 
 .footer-brand img {
