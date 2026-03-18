@@ -2,6 +2,26 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
+      "source": "/contact/",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/success/",
+      "destination": "/success",
+      "permanent": true
+    },
+    {
+      "source": "/privacy-policy/",
+      "destination": "/privacy-policy",
+      "permanent": true
+    },
+    {
+      "source": "/terms-of-use/",
+      "destination": "/terms-of-use",
+      "permanent": true
+    },
+    {
       "source": "/contact.html",
       "destination": "/contact",
       "permanent": true
