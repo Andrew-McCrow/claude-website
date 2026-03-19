@@ -22,7 +22,9 @@
   var NAV_HTML = [
     "<nav>",
     '  <a href="/" class="nav-logo">',
-    '    <img src="' + base + 'assets/images/logo-primary.png" alt="Octopus AI" />',
+    '    <img src="' +
+      base +
+      'assets/images/logo-primary.png" alt="Octopus AI" />',
     '    <span class="nav-logo-name">Octopus AI</span>',
     "  </a>",
     '  <ul class="nav-links">',
@@ -91,7 +93,9 @@
     '<div class="footer">',
     '  <div class="footer-brand">',
     '    <a href="/" aria-label="Go to homepage">',
-    '      <img src="' + base + 'assets/images/logo-primary.png" alt="Octopus AI" />',
+    '      <img src="' +
+      base +
+      'assets/images/logo-primary.png" alt="Octopus AI" />',
     "      <span>Octopus AI</span>",
     "    </a>",
     "  </div>",

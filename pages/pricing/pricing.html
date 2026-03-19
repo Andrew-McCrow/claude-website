@@ -1,0 +1,1074 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing — Octopus AI</title>
+    <meta
+      name="description"
+      content="Simple, transparent pricing for AI assistants that actually work. Start free, scale as you grow."
+    />
+    <link rel="canonical" href="https://asktheoctopus.com/archive-pricing" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://asktheoctopus.com/archive-pricing"
+    />
+    <meta property="og:title" content="Pricing — Octopus AI" />
+    <meta
+      property="og:description"
+      content="Simple, transparent pricing for AI assistants that actually work. Start free, scale as you grow."
+    />
+    <meta
+      property="og:image"
+      content="https://asktheoctopus.com/assets/images/logo-primary.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Pricing — Octopus AI" />
+    <meta
+      name="twitter:description"
+      content="Simple, transparent pricing for AI assistants that actually work. Start free, scale as you grow."
+    />
+    <meta
+      name="twitter:image"
+      content="https://asktheoctopus.com/assets/images/logo-primary.png"
+    />
+    <link rel="icon" href="../../assets/images/logo-primary.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (function () {
+        try {
+          if (
+            window.sessionStorage.getItem("octopus_page_transition") === "1"
+          ) {
+            document.documentElement.classList.add("transition-pending");
+          }
+        } catch (error) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <style>
+      /* Billing toggle */
+      .billing-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        width: fit-content;
+        margin: 28px auto 0;
+      }
+      .billing-toggle span {
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(250, 250, 248, 0.46);
+        transition: color 0.2s;
+      }
+      .billing-toggle span.active {
+        color: rgba(250, 250, 248, 0.92);
+      }
+      .toggle-track {
+        position: relative;
+        width: 64px;
+        height: 34px;
+        background: rgba(127, 216, 190, 0.12);
+        border: 1px solid rgba(127, 216, 190, 0.28);
+        border-radius: 20px;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+      }
+      .toggle-track.annual {
+        background: rgba(127, 216, 190, 0.32);
+        border-color: rgba(127, 216, 190, 0.62);
+      }
+      .toggle-thumb {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 26px;
+        height: 26px;
+        background: var(--color-text);
+        border-radius: 50%;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+        transition: transform 0.2s;
+      }
+      .toggle-track.annual .toggle-thumb {
+        transform: translateX(30px);
+      }
+      .save-badge {
+        display: inline-block;
+        padding: 2px 8px;
+        background: rgba(127, 216, 190, 0.12);
+        border: 1px solid rgba(127, 216, 190, 0.25);
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--color-accent);
+        letter-spacing: 0.04em;
+      }
+
+      /* Keep plans visually close to the billing toggle on this page */
+      #top.section {
+        padding-bottom: clamp(40px, 5vw, 56px);
+      }
+      #top .hero {
+        min-height: auto;
+        padding: 24px 0 10px;
+        justify-content: center;
+      }
+      #top .hero-text {
+        max-width: 880px;
+        width: 100%;
+        text-align: center;
+      }
+      #top .lead {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #plans .container {
+        max-width: 1160px;
+      }
+
+      /* Pricing grid */
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-top: 6px;
+        background: transparent;
+        border-radius: 0;
+        overflow: visible;
+        box-shadow: none;
+      }
+      .pricing-card {
+        background: linear-gradient(
+          180deg,
+          rgba(10, 24, 46, 0.95) 0%,
+          rgba(6, 18, 38, 0.98) 100%
+        );
+        padding: 36px 32px 34px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid rgba(127, 216, 190, 0.2);
+        border-radius: 30px;
+        box-shadow:
+          inset 0 1px 0 rgba(127, 216, 190, 0.12),
+          0 20px 42px rgba(3, 10, 20, 0.34);
+        transition:
+          border-color 0.22s ease,
+          box-shadow 0.22s ease;
+      }
+      .pricing-card:hover {
+        border-color: rgba(127, 216, 190, 0.28);
+        box-shadow:
+          inset 0 1px 0 rgba(127, 216, 190, 0.18),
+          0 24px 48px rgba(3, 10, 20, 0.38);
+      }
+      .pricing-card.featured {
+        background: linear-gradient(
+          180deg,
+          rgba(40, 57, 88, 0.94) 0%,
+          rgba(31, 45, 70, 0.97) 100%
+        );
+        border-color: rgba(127, 216, 190, 0.52);
+        box-shadow:
+          inset 0 0 0 1px rgba(127, 216, 190, 0.23),
+          0 24px 48px rgba(4, 10, 18, 0.34);
+        outline: none;
+        z-index: 1;
+      }
+      .plan-badge {
+        display: inline-block;
+        padding: 3px 10px;
+        background: rgba(127, 216, 190, 0.12);
+        border: 1px solid rgba(127, 216, 190, 0.25);
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--color-accent);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 0;
+        width: fit-content;
+      }
+      .plan-header {
+        min-height: 38px;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .plan-badge-discount {
+        background: rgba(127, 216, 190, 0.2);
+        border-color: rgba(127, 216, 190, 0.45);
+        color: var(--color-accent);
+        letter-spacing: 0;
+        text-transform: none;
+        margin-bottom: 0;
+      }
+      .plan-name {
+        font-family: var(--font-display);
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--color-text);
+        margin-bottom: 0;
+        line-height: 1;
+      }
+      .plan-desc {
+        font-size: 13px;
+        color: rgba(250, 250, 248, 0.55);
+        line-height: 1.6;
+        min-height: 30px;
+        margin-bottom: 14px;
+      }
+      .plan-price {
+        min-height: 114px;
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: 12px;
+      }
+      .price-amount {
+        font-family: var(--font-display);
+        font-size: 44px;
+        font-weight: 700;
+        color: var(--color-text);
+        line-height: 1;
+      }
+      .price-amount sup {
+        font-size: 22px;
+        font-weight: 600;
+        vertical-align: top;
+        margin-top: 8px;
+        display: inline-block;
+      }
+      .price-amount-contact {
+        font-size: clamp(36px, 2.8vw, 44px);
+        line-height: 1;
+        letter-spacing: -0.01em;
+        max-width: none;
+        white-space: nowrap;
+      }
+      .price-period {
+        font-size: 13px;
+        color: rgba(250, 250, 248, 0.45);
+        min-height: 24px;
+        margin-bottom: 22px;
+      }
+      .price-annual {
+        display: none;
+      }
+
+      .plan-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 15px 26px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        line-height: 1;
+        text-transform: uppercase;
+        white-space: nowrap;
+        text-decoration: none;
+        transition: opacity 0.2s;
+        margin-bottom: 20px;
+        min-width: 160px;
+      }
+      .plan-cta:hover {
+        opacity: 0.85;
+      }
+      .plan-cta-primary {
+        background: linear-gradient(
+          180deg,
+          rgba(137, 223, 199, 1) 0%,
+          rgba(111, 204, 177, 1) 100%
+        );
+        color: #0d1b2a;
+        box-shadow: 0 10px 26px rgba(127, 216, 190, 0.28);
+      }
+      .plan-cta-outline {
+        background: transparent;
+        color: var(--color-text);
+        border: 1px solid rgba(250, 250, 248, 0.18);
+      }
+
+      .plan-divider {
+        height: 1px;
+        background: rgba(127, 216, 190, 0.14);
+        margin-bottom: 24px;
+      }
+      .plan-features-label {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgba(250, 250, 248, 0.35);
+        margin-bottom: 16px;
+      }
+      .plan-features {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        flex: 1;
+        margin-top: 8px;
+      }
+      .plan-features li {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+        color: rgba(250, 250, 248, 0.75);
+        line-height: 1.5;
+      }
+      .plan-features li svg {
+        width: 15px;
+        height: 15px;
+        flex-shrink: 0;
+        margin-top: 2px;
+        color: var(--color-accent);
+      }
+      .plan-features li.muted {
+        color: rgba(250, 250, 248, 0.35);
+      }
+      .plan-features li.muted svg {
+        color: rgba(250, 250, 248, 0.2);
+      }
+
+      /* FAQ */
+      .faq-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        margin-top: 38px;
+        background: rgba(127, 216, 190, 0.07);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .faq-item {
+        background: var(--surface-card);
+        border: 1px solid transparent;
+        transition: border-color 0.2s;
+      }
+      .faq-item.open {
+        border-color: rgba(127, 216, 190, 0.25);
+      }
+      .faq-q {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-align: left;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 22px 28px;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--color-text);
+      }
+      .faq-q:hover {
+        background: rgba(127, 216, 190, 0.05);
+      }
+      .faq-q:focus-visible {
+        outline: 2px solid rgba(127, 216, 190, 0.5);
+        outline-offset: -2px;
+      }
+      .faq-icon {
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+        color: rgba(250, 250, 248, 0.55);
+        transition:
+          transform 0.22s ease,
+          color 0.22s ease;
+      }
+      .faq-item.open .faq-icon {
+        transform: rotate(180deg);
+        color: var(--color-accent);
+      }
+      .faq-a {
+        padding: 0 28px 0;
+        font-size: 13px;
+        color: rgba(250, 250, 248, 0.6);
+        line-height: 1.7;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition:
+          max-height 0.28s ease,
+          opacity 0.22s ease,
+          padding-bottom 0.22s ease;
+      }
+      .faq-a p {
+        margin: 0;
+      }
+      .faq-item.open .faq-a {
+        max-height: 320px;
+        opacity: 1;
+        padding-bottom: 22px;
+      }
+
+      @media (max-width: 900px) {
+        .pricing-grid {
+          grid-template-columns: 1fr;
+          gap: 22px;
+        }
+        .plan-name,
+        .plan-header,
+        .plan-desc,
+        .plan-price,
+        .price-period {
+          min-height: 0;
+        }
+        .price-amount-contact {
+          font-size: clamp(40px, 10vw, 52px);
+        }
+        .faq-q {
+          padding: 20px;
+        }
+        .faq-a {
+          padding: 0 20px 0;
+        }
+        .faq-item.open .faq-a {
+          padding-bottom: 20px;
+        }
+        .pricing-card.featured {
+          border-top: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="scene" aria-hidden="true"></canvas>
+    <div id="nav-placeholder"></div>
+    <main>
+      <!-- Hero -->
+      <section id="top" class="section">
+        <div class="container">
+          <div class="hero">
+            <div class="hero-text">
+              <h1>Simple, transparent<br /><em>pricing.</em></h1>
+              <p class="lead">
+                One AI assistant platform. Three plans. No hidden fees.
+              </p>
+              <div class="billing-toggle" id="billingToggle">
+                <span id="labelMonthly">Monthly</span>
+                <div
+                  class="toggle-track annual"
+                  id="toggleTrack"
+                  role="switch"
+                  aria-checked="true"
+                  tabindex="0"
+                >
+                  <div class="toggle-thumb"></div>
+                </div>
+                <span class="active" id="labelAnnual">Annual</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pricing Cards -->
+      <section id="plans" class="section" style="padding-top: 0">
+        <div class="container">
+          <div class="pricing-grid">
+            <!-- Playground -->
+            <div class="pricing-card">
+              <div class="plan-header">
+                <div class="plan-name">Playground</div>
+              </div>
+              <p class="plan-desc">Try for free</p>
+              <div class="plan-divider"></div>
+              <div class="plan-price">
+                <div class="price-amount price-monthly"><sup>$</sup>0</div>
+                <div class="price-amount price-annual" style="display: none">
+                  <sup>$</sup>0
+                </div>
+              </div>
+              <p class="price-period">free</p>
+              <a href="/contact" class="plan-cta plan-cta-primary"
+                >TRY FOR FREE</a
+              >
+              <ul class="plan-features">
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  200 Free Messages
+                </li>
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Web, FB Messenger, Instagram
+                </li>
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Automate Tasks with Agendas
+                </li>
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Train on Webpages, Docs and More
+                </li>
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Multiple Users
+                </li>
+              </ul>
+            </div>
+
+            <!-- Professional -->
+            <div class="pricing-card featured">
+              <div class="plan-header">
+                <div class="plan-name">Professional</div>
+                <div class="plan-badge plan-badge-discount">Discounted 17%</div>
+              </div>
+              <p class="plan-desc">For teams</p>
+              <div class="plan-divider"></div>
+              <div class="plan-price">
+                <div class="price-amount price-monthly"><sup>$</sup>199</div>
+                <div class="price-amount price-annual" style="display: none">
+                  <sup>$</sup>166
+                </div>
+              </div>
+              <p class="price-period">per month</p>
+              <a href="/contact" class="plan-cta plan-cta-primary"
+                >FIRST MONTH FREE</a
+              >
+              <ul class="plan-features">
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Everything in the Playground Plan
+                </li>
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  1,000 Free Messages per Month
+                </li>
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  WhatsApp, SMS, Slack, Discord
+                </li>
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Live Sync to Your Knowledge Base
+                </li>
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Custom Alerts &amp; Rate Limiting
+                </li>
+              </ul>
+            </div>
+
+            <!-- Enterprise -->
+            <div class="pricing-card">
+              <div class="plan-header">
+                <div class="plan-name">Enterprise</div>
+              </div>
+              <p class="plan-desc">Scale with AI</p>
+              <div class="plan-divider"></div>
+              <div class="plan-price">
+                <div class="price-amount price-amount-contact">
+                  Contact Sales
+                </div>
+              </div>
+              <p class="price-period">custom pricing</p>
+              <a href="/contact" class="plan-cta plan-cta-primary"
+                >BOOK A MEETING</a
+              >
+              <ul class="plan-features">
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Everything in the Professional Plan
+                </li>
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Custom Discounted Pricing
+                </li>
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Dedicated Account Management
+                </li>
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Monthly Reporting
+                </li>
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Bespoke Integrations &amp; Solutions
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="section">
+        <div class="container">
+          <div class="section-intro max-w-500">
+            <span class="eyebrow">FAQ</span>
+            <h2>Common questions.</h2>
+          </div>
+          <div class="faq-list">
+            <div class="faq-item open">
+              <button
+                class="faq-q"
+                type="button"
+                id="faq-q-1"
+                aria-expanded="true"
+                aria-controls="faq-a-1"
+              >
+                <span>What counts as a conversation?</span>
+                <svg
+                  class="faq-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+              <div
+                class="faq-a"
+                id="faq-a-1"
+                role="region"
+                aria-labelledby="faq-q-1"
+              >
+                <p>
+                  A conversation is a single session between a user and your AI
+                  assistant, regardless of how many messages are exchanged
+                  within it. Sessions that last under 30 seconds or receive no
+                  response are not counted.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button
+                class="faq-q"
+                type="button"
+                id="faq-q-2"
+                aria-expanded="false"
+                aria-controls="faq-a-2"
+              >
+                <span>Can I change plans at any time?</span>
+                <svg
+                  class="faq-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+              <div
+                class="faq-a"
+                id="faq-a-2"
+                role="region"
+                aria-labelledby="faq-q-2"
+                hidden
+              >
+                <p>
+                  Yes. You can upgrade or downgrade at any time. Upgrades take
+                  effect immediately. Downgrades take effect at the start of
+                  your next billing cycle.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button
+                class="faq-q"
+                type="button"
+                id="faq-q-3"
+                aria-expanded="false"
+                aria-controls="faq-a-3"
+              >
+                <span>What happens if I go over my conversation limit?</span>
+                <svg
+                  class="faq-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+              <div
+                class="faq-a"
+                id="faq-a-3"
+                role="region"
+                aria-labelledby="faq-q-3"
+                hidden
+              >
+                <p>
+                  We'll notify you when you reach 80% of your limit. If you
+                  exceed it, additional conversations are billed at a small
+                  overage rate rather than cutting off service. You can also
+                  upgrade your plan at any time.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button
+                class="faq-q"
+                type="button"
+                id="faq-q-4"
+                aria-expanded="false"
+                aria-controls="faq-a-4"
+              >
+                <span>Do you offer a free trial?</span>
+                <svg
+                  class="faq-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+              <div
+                class="faq-a"
+                id="faq-a-4"
+                role="region"
+                aria-labelledby="faq-q-4"
+                hidden
+              >
+                <p>
+                  Yes - every plan includes a 14-day free trial, no credit card
+                  required. You'll have full access to your chosen plan's
+                  features so you can test with real data before committing.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button
+                class="faq-q"
+                type="button"
+                id="faq-q-5"
+                aria-expanded="false"
+                aria-controls="faq-a-5"
+              >
+                <span>What integrations are included?</span>
+                <svg
+                  class="faq-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+              <div
+                class="faq-a"
+                id="faq-a-5"
+                role="region"
+                aria-labelledby="faq-q-5"
+                hidden
+              >
+                <p>
+                  Professional plans include our core integration library - CRM,
+                  helpdesk, calendar, and messaging tools. Enterprise plans get
+                  full API access and support for custom integrations with any
+                  tool in your stack.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button
+                class="faq-q"
+                type="button"
+                id="faq-q-6"
+                aria-expanded="false"
+                aria-controls="faq-a-6"
+              >
+                <span>Is my data secure?</span>
+                <svg
+                  class="faq-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+              <div
+                class="faq-a"
+                id="faq-a-6"
+                role="region"
+                aria-labelledby="faq-q-6"
+                hidden
+              >
+                <p>
+                  Yes. All data is encrypted in transit and at rest. We do not
+                  use your data to train AI models. Enterprise plans include
+                  additional controls for data residency, retention policies,
+                  and compliance requirements.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA + Footer -->
+      <section id="about" class="section">
+        <div class="container">
+          <div class="rule"></div>
+          <div class="cta-block">
+            <span class="eyebrow text-center">Get Started</span>
+            <h2>Ready to work smarter?</h2>
+            <a href="/contact" class="btn btn-primary btn-lg">Book Call</a>
+            <p class="cta-sub">No commitment. No sales pressure.</p>
+          </div>
+          <div id="footer-placeholder"></div>
+        </div>
+      </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="../../assets/js/components.js"></script>
+    <script src="../../assets/js/menu.js"></script>
+    <script src="../../assets/js/page-transition.js"></script>
+    <script src="../../assets/js/scene-bg.js"></script>
+    <script>
+      // Billing toggle
+      var track = document.getElementById("toggleTrack");
+      var labelMonthly = document.getElementById("labelMonthly");
+      var labelAnnual = document.getElementById("labelAnnual");
+      var monthlyPrices = document.querySelectorAll(".price-monthly");
+      var annualPrices = document.querySelectorAll(".price-annual");
+      var periodLabels = document.querySelectorAll(".period-label");
+      var annual = true;
+
+      function setAnnual(val) {
+        annual = val;
+        track.classList.toggle("annual", annual);
+        track.setAttribute("aria-checked", String(annual));
+        labelMonthly.classList.toggle("active", !annual);
+        labelAnnual.classList.toggle("active", annual);
+        monthlyPrices.forEach(function (el) {
+          el.style.display = annual ? "none" : "block";
+        });
+        annualPrices.forEach(function (el) {
+          el.style.display = annual ? "block" : "none";
+        });
+        periodLabels.forEach(function (el) {
+          el.textContent = annual ? "annually" : "monthly";
+        });
+      }
+
+      setAnnual(annual);
+
+      track.addEventListener("click", function () {
+        setAnnual(!annual);
+      });
+      track.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setAnnual(!annual);
+        }
+      });
+
+      // FAQ accordion
+      var faqButtons = document.querySelectorAll(".faq-q");
+
+      function setFaqState(button, expanded) {
+        var item = button.closest(".faq-item");
+        var answerId = button.getAttribute("aria-controls");
+        var answer = answerId ? document.getElementById(answerId) : null;
+
+        button.setAttribute("aria-expanded", String(expanded));
+        if (item) {
+          item.classList.toggle("open", expanded);
+        }
+        if (answer) {
+          answer.hidden = !expanded;
+        }
+      }
+
+      faqButtons.forEach(function (button) {
+        setFaqState(button, button.getAttribute("aria-expanded") === "true");
+
+        button.addEventListener("click", function () {
+          var isExpanded = button.getAttribute("aria-expanded") === "true";
+
+          faqButtons.forEach(function (otherButton) {
+            setFaqState(otherButton, false);
+          });
+
+          setFaqState(button, !isExpanded);
+        });
+      });
+    </script>
+  </body>
+</html>

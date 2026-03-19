@@ -24,7 +24,9 @@
     { "source": "/screening/", "destination": "/screening", "permanent": true },
     { "source": "/screening.html", "destination": "/screening", "permanent": true },
     { "source": "/training/", "destination": "/training", "permanent": true },
-    { "source": "/training.html", "destination": "/training", "permanent": true }
+    { "source": "/training.html", "destination": "/training", "permanent": true },
+    { "source": "/pricing", "destination": "/archive-pricing", "permanent": true },
+    { "source": "/pricing/", "destination": "/archive-pricing", "permanent": true }
   ],
   "rewrites": [
     { "source": "/contact", "destination": "/pages/contact/contact.html" },
@@ -38,6 +40,7 @@
     { "source": "/procurement", "destination": "/pages/solutions/procurement.html" },
     { "source": "/recruitment", "destination": "/pages/solutions/recruitment.html" },
     { "source": "/screening", "destination": "/pages/solutions/screening.html" },
-    { "source": "/training", "destination": "/pages/solutions/training.html" }
+    { "source": "/training", "destination": "/pages/solutions/training.html" },
+    { "source": "/archive-pricing", "destination": "/pages/pricing/pricing.html" }
   ]
 }
