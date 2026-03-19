@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Assistants for Training — Octopus AI</title>
+    <meta
+      name="description"
+      content="Deliver any type of training at scale. Compliance, product knowledge, process, skills — your AI makes learning stick and keeps knowledge accessible long after the course ends."
+    />
+    <link rel="canonical" href="https://asktheoctopus.com/training" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://asktheoctopus.com/training" />
+    <meta property="og:title" content="AI Assistants for Training — Octopus AI" />
+    <meta
+      property="og:description"
+      content="Deliver any type of training at scale. Compliance, product knowledge, process, skills — your AI makes learning stick and keeps knowledge accessible long after the course ends."
+    />
+    <meta property="og:image" content="https://asktheoctopus.com/assets/images/logo-primary.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AI Assistants for Training — Octopus AI" />
+    <meta
+      name="twitter:description"
+      content="Deliver any type of training at scale. Compliance, product knowledge, process, skills — your AI makes learning stick and keeps knowledge accessible long after the course ends."
+    />
+    <meta name="twitter:image" content="https://asktheoctopus.com/assets/images/logo-primary.png" />
+    <link rel="icon" href="assets/images/logo-primary.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (function () {
+        try {
+          if (window.sessionStorage.getItem("octopus_page_transition") === "1") {
+            document.documentElement.classList.add("transition-pending");
+          }
+        } catch (error) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <style>
+      .value-props {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        margin-top: 38px;
+        background: rgba(127, 216, 190, 0.07);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .value-prop {
+        background: var(--surface-card);
+        padding: 36px 28px;
+        transition: background 0.2s;
+      }
+      .value-prop:hover { background: var(--surface-card-hover); }
+      .vp-icon {
+        width: 42px; height: 42px; margin-bottom: 18px;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(127, 216, 190, 0.1);
+        border-radius: 10px; padding: 9px;
+      }
+      .vp-icon svg { width: 22px; height: 22px; }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        margin-top: 38px;
+        background: rgba(127, 216, 190, 0.07);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .feature-card {
+        background: var(--surface-card);
+        padding: 28px 24px;
+        transition: background 0.2s;
+      }
+      .feature-card:hover { background: var(--surface-card-hover); }
+      .feat-icon {
+        width: 38px; height: 38px; margin-bottom: 14px;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(127, 216, 190, 0.1);
+        border-radius: 9px; padding: 8px;
+      }
+      .feat-icon svg { width: 20px; height: 20px; }
+      .feature-card h3 { font-size: 15px; margin-bottom: 8px; }
+      .feature-card p { font-size: 13px; }
+
+      .integrations-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        margin-top: 38px;
+      }
+      .integration-group {
+        padding: 24px;
+        background: var(--surface-card);
+        border-radius: 11px;
+        border: 1px solid var(--border-faint);
+      }
+      .integration-group h3 {
+        font-size: 13px; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.08em;
+        color: var(--color-accent); margin-bottom: 14px;
+      }
+
+      .stats-4 { grid-template-columns: repeat(4, 1fr); }
+
+      .how-steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        margin-top: 38px;
+        background: rgba(127, 216, 190, 0.07);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .how-step {
+        background: var(--surface-card);
+        padding: 36px 28px;
+        transition: background 0.2s;
+      }
+      .how-step:hover { background: var(--surface-card-hover); }
+      .how-step-num {
+        font-family: var(--font-display); font-size: 38px;
+        font-weight: 700; color: rgba(127, 216, 190, 0.2);
+        line-height: 1; margin-bottom: 18px;
+      }
+      .how-step h3 { font-size: 16px; margin-bottom: 10px; }
+
+      @media (max-width: 768px) {
+        .value-props, .features-grid, .how-steps { grid-template-columns: 1fr; }
+        .integrations-grid { grid-template-columns: 1fr; }
+        .stats-4 { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 480px) {
+        .stats-4 { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="scene" aria-hidden="true"></canvas>
+    <div id="nav-placeholder"></div>
+    <main>
+
+      <!-- Hero -->
+      <section id="top" class="section">
+        <div class="container">
+          <div class="hero">
+            <div class="hero-text">
+              <h1>AI Assistants For<br /><em>Training.</em></h1>
+              <p class="lead">
+                Compliance, product knowledge, process, skills — your AI assistant delivers training at scale.
+              </p>
+              <div class="hero-actions">
+                <a href="contact.html" class="btn btn-primary btn-lg">Book a Demo</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Value Props -->
+      <section id="value" class="section">
+        <div class="container">
+          <div class="section-intro max-w-500">
+            <span class="eyebrow">Why Octopus AI</span>
+            <h2>Train on any topic.<br />Knowledge that sticks.</h2>
+          </div>
+          <div class="value-props">
+            <div class="value-prop">
+              <div class="vp-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                </svg>
+              </div>
+              <h3>Train on Any Topic</h3>
+              <p>
+                Compliance, product knowledge, sales skills, processes — upload your content and your AI is ready to train anyone in your organisation on demand.
+              </p>
+            </div>
+            <div class="value-prop">
+              <div class="vp-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <h3>Knowledge That Sticks</h3>
+              <p>
+                Learning doesn't end when the course does. Employees can revisit content, ask follow-up questions, and look up procedures any time — so knowledge stays fresh and applied.
+              </p>
+            </div>
+            <div class="value-prop">
+              <div class="vp-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <circle cx="18" cy="5" r="3"/>
+                  <circle cx="6" cy="12" r="3"/>
+                  <circle cx="18" cy="19" r="3"/>
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                </svg>
+              </div>
+              <h3>Connects to Your Stack</h3>
+              <p>
+                Sync with your LMS, HR platforms, and knowledge base in minutes. Octopus AI complements your existing programmes without replacing them.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Grid -->
+      <section id="features" class="section">
+        <div class="container">
+          <div class="section-intro max-w-500">
+            <span class="eyebrow">Features</span>
+            <h2>Everything your L&amp;D team needs,<br />built in from day one.</h2>
+          </div>
+          <div class="features-grid">
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M9 11l3 3L22 4"/>
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                </svg>
+              </div>
+              <h3>Compliance Training</h3>
+              <p>Keep your workforce up to date on regulations, policies, and mandatory requirements — with instant Q&A to reinforce what matters.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <h3>Knowledge Reinforcement</h3>
+              <p>Reinforce training content through conversational Q&A so employees retain what they've learned and can look things up instantly.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+              </div>
+              <h3>Product Knowledge</h3>
+              <p>Train customer-facing teams on your products and services so they always have accurate, confident answers at their fingertips.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <line x1="18" y1="20" x2="18" y2="10"/>
+                  <line x1="12" y1="20" x2="12" y2="4"/>
+                  <line x1="6" y1="20" x2="6" y2="14"/>
+                </svg>
+              </div>
+              <h3>Progress Tracking</h3>
+              <p>Monitor completion rates, common knowledge gaps, and learning outcomes so you know where to focus your training effort.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/>
+                </svg>
+              </div>
+              <h3>Multilingual</h3>
+              <p>Deliver training and onboarding in 30+ languages. Essential for global teams and diverse workforces.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M12 3l7 3v5c0 5-3.2 8-7 10-3.8-2-7-5-7-10V6l7-3z"/>
+                  <polyline points="9 12.5 11.3 14.8 15.5 10.6"/>
+                </svg>
+              </div>
+              <h3>Secure</h3>
+              <p>Enterprise-grade encryption and role-based permissions. Employee data and training content stay protected at every step.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Integrations -->
+      <section id="integrations" class="section">
+        <div class="container">
+          <div class="section-intro max-w-500">
+            <span class="eyebrow">Integrations</span>
+            <h2>Works with your existing stack.</h2>
+          </div>
+          <div class="integrations-grid">
+            <div class="integration-group">
+              <h3>Learning Management Systems</h3>
+              <p>
+                Connect your LMS so the AI complements existing training programmes and surfaces the right content at the right moment.
+              </p>
+            </div>
+            <div class="integration-group">
+              <h3>HR Platforms</h3>
+              <p>
+                Sync with your HR system so employee records, roles, and training milestones stay aligned without manual updates.
+              </p>
+            </div>
+            <div class="integration-group">
+              <h3>Knowledge Base & Docs</h3>
+              <p>
+                Train the AI on your policies, procedures, and training materials so employees always get accurate, up-to-date answers.
+              </p>
+            </div>
+            <div class="integration-group">
+              <h3>Communication Tools</h3>
+              <p>
+                Reach employees across email and messaging channels wherever they work, and alert managers when action is needed.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <section id="results" class="section">
+        <div class="container">
+          <div class="section-intro">
+            <span class="eyebrow">Results</span>
+            <h2>Real impact.<br />Measurable returns.</h2>
+          </div>
+          <div class="stats stats-4">
+            <div class="stat">
+              <div class="stat-num">60%</div>
+              <p>Reduction in time spent answering repetitive training queries</p>
+            </div>
+            <div class="stat">
+              <div class="stat-num">3&times;</div>
+              <p>More training topics covered with the same team</p>
+            </div>
+            <div class="stat">
+              <div class="stat-num">30+</div>
+              <p>Languages supported out of the box</p>
+            </div>
+            <div class="stat">
+              <div class="stat-num">24/7</div>
+              <p>On-demand support for employees anywhere</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works -->
+      <section id="how" class="section">
+        <div class="container">
+          <div class="section-intro">
+            <span class="eyebrow">How It Works</span>
+            <h2>Live in days,<br />not months.</h2>
+          </div>
+          <div class="how-steps">
+            <div class="how-step">
+              <div class="how-step-num">01</div>
+              <h3>Connect Your Knowledge</h3>
+              <p>
+                Upload your training materials, policies, and procedures. The AI learns your content and can answer questions from day one.
+              </p>
+            </div>
+            <div class="how-step">
+              <div class="how-step-num">02</div>
+              <h3>Deploy Across Teams</h3>
+              <p>
+                Launch your training assistant for any team or role across web and messaging apps — all from a single configuration.
+              </p>
+            </div>
+            <div class="how-step">
+              <div class="how-step-num">03</div>
+              <h3>Monitor & Improve</h3>
+              <p>
+                Track knowledge gaps and completion rates in real time. Refine your content as your programmes and processes evolve.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA + Footer -->
+      <section id="about" class="section">
+        <div class="container">
+          <div class="rule"></div>
+          <div class="cta-block">
+            <span class="eyebrow text-center">Get Started</span>
+            <h2>Ready to work smarter?</h2>
+            <a href="contact.html" class="btn btn-primary btn-lg">Book Call</a>
+            <p class="cta-sub">No commitment. No sales pressure.</p>
+          </div>
+          <div id="footer-placeholder"></div>
+        </div>
+      </section>
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/menu.js"></script>
+    <script src="assets/js/page-transition.js"></script>
+    <script src="assets/js/scene.js"></script>
+  </body>
+</html>
