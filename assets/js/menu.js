@@ -1,30 +1,37 @@
 (function () {
   // -------------------------------------------------------------------------
-  // Desktop dropdown — "Use Cases"
+  // Desktop dropdowns
   // -------------------------------------------------------------------------
-  var dropdown = document.querySelector(".nav-dropdown");
-  if (dropdown) {
-    var dropdownToggle = dropdown.querySelector(".nav-dropdown-toggle");
+  var dropdowns = document.querySelectorAll(".nav-dropdown");
 
-    dropdownToggle.addEventListener("click", function (e) {
-      e.stopPropagation();
-      var isOpen = dropdown.classList.contains("open");
-      dropdown.classList.toggle("open", !isOpen);
-      dropdownToggle.setAttribute("aria-expanded", String(!isOpen));
-    });
-
-    document.addEventListener("click", function () {
-      dropdown.classList.remove("open");
-      dropdownToggle.setAttribute("aria-expanded", "false");
-    });
-
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") {
-        dropdown.classList.remove("open");
-        dropdownToggle.setAttribute("aria-expanded", "false");
-      }
+  function closeAllDropdowns() {
+    dropdowns.forEach(function (d) {
+      d.classList.remove("open");
+      d.querySelector(".nav-dropdown-toggle").setAttribute("aria-expanded", "false");
     });
   }
+
+  dropdowns.forEach(function (dropdown) {
+    var toggle = dropdown.querySelector(".nav-dropdown-toggle");
+
+    toggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var isOpen = dropdown.classList.contains("open");
+      closeAllDropdowns();
+      if (!isOpen) {
+        dropdown.classList.add("open");
+        toggle.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+
+  document.addEventListener("click", closeAllDropdowns);
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      closeAllDropdowns();
+    }
+  });
 
   // -------------------------------------------------------------------------
   // Mobile hamburger menu
