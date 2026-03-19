@@ -1,4 +1,34 @@
 (function () {
+  // -------------------------------------------------------------------------
+  // Desktop dropdown — "Use Cases"
+  // -------------------------------------------------------------------------
+  var dropdown = document.querySelector(".nav-dropdown");
+  if (dropdown) {
+    var dropdownToggle = dropdown.querySelector(".nav-dropdown-toggle");
+
+    dropdownToggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var isOpen = dropdown.classList.contains("open");
+      dropdown.classList.toggle("open", !isOpen);
+      dropdownToggle.setAttribute("aria-expanded", String(!isOpen));
+    });
+
+    document.addEventListener("click", function () {
+      dropdown.classList.remove("open");
+      dropdownToggle.setAttribute("aria-expanded", "false");
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        dropdown.classList.remove("open");
+        dropdownToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+
+  // -------------------------------------------------------------------------
+  // Mobile hamburger menu
+  // -------------------------------------------------------------------------
   var menuToggle = document.querySelector(".menu-toggle");
   var mobileMenu = document.getElementById("mobile-menu");
 

@@ -50,6 +50,16 @@
       "source": "/property-management.html",
       "destination": "/property-management",
       "permanent": true
+    },
+    {
+      "source": "/venture-capital/",
+      "destination": "/venture-capital",
+      "permanent": true
+    },
+    {
+      "source": "/venture-capital.html",
+      "destination": "/venture-capital",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -72,6 +82,10 @@
     {
       "source": "/property-management",
       "destination": "/property-management.html"
+    },
+    {
+      "source": "/venture-capital",
+      "destination": "/venture-capital.html"
     }
   ]
 }

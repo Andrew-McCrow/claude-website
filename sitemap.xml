@@ -6,17 +6,27 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://asktheoctopus.com/contact.html</loc>
+    <loc>https://asktheoctopus.com/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://asktheoctopus.com/privacy-policy.html</loc>
+    <loc>https://asktheoctopus.com/property-management</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://asktheoctopus.com/venture-capital</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://asktheoctopus.com/privacy-policy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://asktheoctopus.com/terms-of-use.html</loc>
+    <loc>https://asktheoctopus.com/terms-of-use</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
