@@ -22,6 +22,11 @@
       "permanent": true
     },
     {
+      "source": "/property-management/",
+      "destination": "/property-management",
+      "permanent": true
+    },
+    {
       "source": "/contact.html",
       "destination": "/contact",
       "permanent": true
@@ -39,6 +44,11 @@
     {
       "source": "/terms-of-use.html",
       "destination": "/terms-of-use",
+      "permanent": true
+    },
+    {
+      "source": "/property-management.html",
+      "destination": "/property-management",
       "permanent": true
     }
   ],
@@ -58,6 +68,10 @@
     {
       "source": "/terms-of-use",
       "destination": "/terms-of-use.html"
+    },
+    {
+      "source": "/property-management",
+      "destination": "/property-management.html"
     }
   ]
 }
