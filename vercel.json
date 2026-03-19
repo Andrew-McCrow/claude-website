@@ -5,42 +5,162 @@
     { "source": "/contact.html", "destination": "/contact", "permanent": true },
     { "source": "/success/", "destination": "/success", "permanent": true },
     { "source": "/success.html", "destination": "/success", "permanent": true },
-    { "source": "/privacy-policy/", "destination": "/privacy-policy", "permanent": true },
-    { "source": "/privacy-policy.html", "destination": "/privacy-policy", "permanent": true },
-    { "source": "/terms-of-use/", "destination": "/terms-of-use", "permanent": true },
-    { "source": "/terms-of-use.html", "destination": "/terms-of-use", "permanent": true },
-    { "source": "/property-management/", "destination": "/property-management", "permanent": true },
-    { "source": "/property-management.html", "destination": "/property-management", "permanent": true },
-    { "source": "/venture-capital/", "destination": "/venture-capital", "permanent": true },
-    { "source": "/venture-capital.html", "destination": "/venture-capital", "permanent": true },
-    { "source": "/customer-support/", "destination": "/customer-support", "permanent": true },
-    { "source": "/customer-support.html", "destination": "/customer-support", "permanent": true },
-    { "source": "/inbound-sales/", "destination": "/inbound-sales", "permanent": true },
-    { "source": "/inbound-sales.html", "destination": "/inbound-sales", "permanent": true },
-    { "source": "/procurement/", "destination": "/procurement", "permanent": true },
-    { "source": "/procurement.html", "destination": "/procurement", "permanent": true },
-    { "source": "/recruitment/", "destination": "/recruitment", "permanent": true },
-    { "source": "/recruitment.html", "destination": "/recruitment", "permanent": true },
+    {
+      "source": "/privacy-policy/",
+      "destination": "/privacy-policy",
+      "permanent": true
+    },
+    {
+      "source": "/privacy-policy.html",
+      "destination": "/privacy-policy",
+      "permanent": true
+    },
+    {
+      "source": "/terms-of-use/",
+      "destination": "/terms-of-use",
+      "permanent": true
+    },
+    {
+      "source": "/terms-of-use.html",
+      "destination": "/terms-of-use",
+      "permanent": true
+    },
+    {
+      "source": "/property-management/",
+      "destination": "/property-management",
+      "permanent": true
+    },
+    {
+      "source": "/property-management.html",
+      "destination": "/property-management",
+      "permanent": true
+    },
+    {
+      "source": "/venture-capital/",
+      "destination": "/venture-capital",
+      "permanent": true
+    },
+    {
+      "source": "/venture-capital.html",
+      "destination": "/venture-capital",
+      "permanent": true
+    },
+    {
+      "source": "/customer-support/",
+      "destination": "/customer-support",
+      "permanent": true
+    },
+    {
+      "source": "/customer-support.html",
+      "destination": "/customer-support",
+      "permanent": true
+    },
+    {
+      "source": "/inbound-sales/",
+      "destination": "/inbound-sales",
+      "permanent": true
+    },
+    {
+      "source": "/inbound-sales.html",
+      "destination": "/inbound-sales",
+      "permanent": true
+    },
+    {
+      "source": "/procurement/",
+      "destination": "/procurement",
+      "permanent": true
+    },
+    {
+      "source": "/procurement.html",
+      "destination": "/procurement",
+      "permanent": true
+    },
+    {
+      "source": "/recruitment/",
+      "destination": "/recruitment",
+      "permanent": true
+    },
+    {
+      "source": "/recruitment.html",
+      "destination": "/recruitment",
+      "permanent": true
+    },
     { "source": "/screening/", "destination": "/screening", "permanent": true },
-    { "source": "/screening.html", "destination": "/screening", "permanent": true },
+    {
+      "source": "/screening.html",
+      "destination": "/screening",
+      "permanent": true
+    },
     { "source": "/training/", "destination": "/training", "permanent": true },
-    { "source": "/training.html", "destination": "/training", "permanent": true },
-    { "source": "/pricing", "destination": "/archive-pricing", "permanent": true },
-    { "source": "/pricing/", "destination": "/archive-pricing", "permanent": true }
+    {
+      "source": "/training.html",
+      "destination": "/training",
+      "permanent": true
+    },
+    {
+      "source": "/pricing",
+      "destination": "/archive-pricing",
+      "permanent": true
+    },
+    {
+      "source": "/pricing/",
+      "destination": "/archive-pricing",
+      "permanent": true
+    },
+    {
+      "source": "/pricing.html",
+      "destination": "/archive-pricing",
+      "permanent": true
+    },
+    {
+      "source": "/archive-pricing/",
+      "destination": "/archive-pricing",
+      "permanent": true
+    }
   ],
   "rewrites": [
     { "source": "/contact", "destination": "/pages/contact/contact.html" },
     { "source": "/success", "destination": "/pages/contact/success.html" },
-    { "source": "/privacy-policy", "destination": "/pages/policies/privacy-policy.html" },
-    { "source": "/terms-of-use", "destination": "/pages/policies/terms-of-use.html" },
-    { "source": "/property-management", "destination": "/pages/use-cases/property-management.html" },
-    { "source": "/venture-capital", "destination": "/pages/use-cases/venture-capital.html" },
-    { "source": "/customer-support", "destination": "/pages/solutions/customer-support.html" },
-    { "source": "/inbound-sales", "destination": "/pages/solutions/inbound-sales.html" },
-    { "source": "/procurement", "destination": "/pages/solutions/procurement.html" },
-    { "source": "/recruitment", "destination": "/pages/solutions/recruitment.html" },
-    { "source": "/screening", "destination": "/pages/solutions/screening.html" },
+    {
+      "source": "/privacy-policy",
+      "destination": "/pages/policies/privacy-policy.html"
+    },
+    {
+      "source": "/terms-of-use",
+      "destination": "/pages/policies/terms-of-use.html"
+    },
+    {
+      "source": "/property-management",
+      "destination": "/pages/use-cases/property-management.html"
+    },
+    {
+      "source": "/venture-capital",
+      "destination": "/pages/use-cases/venture-capital.html"
+    },
+    {
+      "source": "/customer-support",
+      "destination": "/pages/solutions/customer-support.html"
+    },
+    {
+      "source": "/inbound-sales",
+      "destination": "/pages/solutions/inbound-sales.html"
+    },
+    {
+      "source": "/procurement",
+      "destination": "/pages/solutions/procurement.html"
+    },
+    {
+      "source": "/recruitment",
+      "destination": "/pages/solutions/recruitment.html"
+    },
+    {
+      "source": "/screening",
+      "destination": "/pages/solutions/screening.html"
+    },
     { "source": "/training", "destination": "/pages/solutions/training.html" },
-    { "source": "/archive-pricing", "destination": "/pages/pricing/pricing.html" }
+    {
+      "source": "/archive-pricing",
+      "destination": "/pages/pricing/pricing.html"
+    }
   ]
 }
