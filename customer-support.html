@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Assistants for Customer Support — Octopus AI</title>
+    <meta
+      name="description"
+      content="Resolve more tickets automatically, respond instantly at any hour, and escalate to your team the moment it matters."
+    />
+    <link rel="canonical" href="https://asktheoctopus.com/customer-support" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://asktheoctopus.com/customer-support" />
+    <meta property="og:title" content="AI Assistants for Customer Support — Octopus AI" />
+    <meta
+      property="og:description"
+      content="Resolve more tickets automatically, respond instantly at any hour, and escalate to your team the moment it matters."
+    />
+    <meta property="og:image" content="https://asktheoctopus.com/assets/images/logo-primary.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AI Assistants for Customer Support — Octopus AI" />
+    <meta
+      name="twitter:description"
+      content="Resolve more tickets automatically, respond instantly at any hour, and escalate to your team the moment it matters."
+    />
+    <meta name="twitter:image" content="https://asktheoctopus.com/assets/images/logo-primary.png" />
+    <link rel="icon" href="assets/images/logo-primary.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (function () {
+        try {
+          if (window.sessionStorage.getItem("octopus_page_transition") === "1") {
+            document.documentElement.classList.add("transition-pending");
+          }
+        } catch (error) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <style>
+      .value-props {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        margin-top: 38px;
+        background: rgba(127, 216, 190, 0.07);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .value-prop {
+        background: var(--surface-card);
+        padding: 36px 28px;
+        transition: background 0.2s;
+      }
+      .value-prop:hover { background: var(--surface-card-hover); }
+      .vp-icon {
+        width: 42px; height: 42px; margin-bottom: 18px;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(127, 216, 190, 0.1);
+        border-radius: 10px; padding: 9px;
+      }
+      .vp-icon svg { width: 22px; height: 22px; }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        margin-top: 38px;
+        background: rgba(127, 216, 190, 0.07);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .feature-card {
+        background: var(--surface-card);
+        padding: 28px 24px;
+        transition: background 0.2s;
+      }
+      .feature-card:hover { background: var(--surface-card-hover); }
+      .feat-icon {
+        width: 38px; height: 38px; margin-bottom: 14px;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(127, 216, 190, 0.1);
+        border-radius: 9px; padding: 8px;
+      }
+      .feat-icon svg { width: 20px; height: 20px; }
+      .feature-card h3 { font-size: 15px; margin-bottom: 8px; }
+      .feature-card p { font-size: 13px; }
+
+      .integrations-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        margin-top: 38px;
+      }
+      .integration-group {
+        padding: 24px;
+        background: var(--surface-card);
+        border-radius: 11px;
+        border: 1px solid var(--border-faint);
+      }
+      .integration-group h3 {
+        font-size: 13px; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.08em;
+        color: var(--color-accent); margin-bottom: 14px;
+      }
+
+      .stats-4 { grid-template-columns: repeat(4, 1fr); }
+
+      .how-steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        margin-top: 38px;
+        background: rgba(127, 216, 190, 0.07);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .how-step {
+        background: var(--surface-card);
+        padding: 36px 28px;
+        transition: background 0.2s;
+      }
+      .how-step:hover { background: var(--surface-card-hover); }
+      .how-step-num {
+        font-family: var(--font-display); font-size: 38px;
+        font-weight: 700; color: rgba(127, 216, 190, 0.2);
+        line-height: 1; margin-bottom: 18px;
+      }
+      .how-step h3 { font-size: 16px; margin-bottom: 10px; }
+
+      @media (max-width: 768px) {
+        .value-props, .features-grid, .how-steps { grid-template-columns: 1fr; }
+        .integrations-grid { grid-template-columns: 1fr; }
+        .stats-4 { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 480px) {
+        .stats-4 { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="scene" aria-hidden="true"></canvas>
+    <div id="nav-placeholder"></div>
+    <main>
+
+      <!-- Hero -->
+      <section id="top" class="section">
+        <div class="container">
+          <div class="hero">
+            <div class="hero-text">
+              <h1>AI Assistants For<br /><em>Customer Support.</em></h1>
+              <p class="lead">
+                Resolve more tickets automatically, respond instantly at any hour, and escalate to your team the moment it matters.
+              </p>
+              <div class="hero-actions">
+                <a href="contact.html" class="btn btn-primary btn-lg">Book a Demo</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Value Props -->
+      <section id="value" class="section">
+        <div class="container">
+          <div class="section-intro max-w-500">
+            <span class="eyebrow">Why Octopus AI</span>
+            <h2>Faster resolutions.<br />Happier customers.</h2>
+          </div>
+          <div class="value-props">
+            <div class="value-prop">
+              <div class="vp-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+              </div>
+              <h3>Handle Volume Without Hiring</h3>
+              <p>
+                Your AI resolves common queries instantly — order status, account issues, FAQs — so your agents focus on the cases that genuinely need a human.
+              </p>
+            </div>
+            <div class="value-prop">
+              <div class="vp-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              </div>
+              <h3>Seamless Agent Handoff</h3>
+              <p>
+                When a conversation needs a human, your agent steps in with full context already loaded. No repeating. No friction. Just a smooth handover.
+              </p>
+            </div>
+            <div class="value-prop">
+              <div class="vp-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <circle cx="18" cy="5" r="3"/>
+                  <circle cx="6" cy="12" r="3"/>
+                  <circle cx="18" cy="19" r="3"/>
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                </svg>
+              </div>
+              <h3>Connects to Your Stack</h3>
+              <p>
+                Sync with your helpdesk, CRM, and knowledge base in minutes. No rebuilding your workflow. Octopus AI slots in where you already work.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Grid -->
+      <section id="features" class="section">
+        <div class="container">
+          <div class="section-intro max-w-500">
+            <span class="eyebrow">Features</span>
+            <h2>Everything your support team needs,<br />built in from day one.</h2>
+          </div>
+          <div class="features-grid">
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+              </div>
+              <h3>Instant Query Resolution</h3>
+              <p>Answers FAQs, order questions, and account queries instantly — without waiting for an agent.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              </div>
+              <h3>Human Chat</h3>
+              <p>Agents jump into any live conversation with full context. Alerts fire the moment escalation is needed.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/>
+                </svg>
+              </div>
+              <h3>Omnichannel</h3>
+              <p>Deploy on web, email, WhatsApp, and Messenger. One assistant, consistent experience across every channel.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <line x1="18" y1="20" x2="18" y2="10"/>
+                  <line x1="12" y1="20" x2="12" y2="4"/>
+                  <line x1="6" y1="20" x2="6" y2="14"/>
+                </svg>
+              </div>
+              <h3>Live Insights</h3>
+              <p>Track resolution rates, top queries, and CSAT trends in real time. Know exactly where to improve.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <h3>Multilingual</h3>
+              <p>Support customers in 30+ languages automatically. No extra configuration or specialist agents required.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M12 3l7 3v5c0 5-3.2 8-7 10-3.8-2-7-5-7-10V6l7-3z"/>
+                  <polyline points="9 12.5 11.3 14.8 15.5 10.6"/>
+                </svg>
+              </div>
+              <h3>Secure</h3>
+              <p>Enterprise-grade encryption and role-based permissions. Customer data stays protected at every step.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Integrations -->
+      <section id="integrations" class="section">
+        <div class="container">
+          <div class="section-intro max-w-500">
+            <span class="eyebrow">Integrations</span>
+            <h2>Works with your existing stack.</h2>
+          </div>
+          <div class="integrations-grid">
+            <div class="integration-group">
+              <h3>Ticketing & Helpdesk</h3>
+              <p>
+                Automatically create, update, and route tickets inside your existing helpdesk. No manual logging by agents.
+              </p>
+            </div>
+            <div class="integration-group">
+              <h3>Feedback & CSAT</h3>
+              <p>
+                Automatically collect satisfaction ratings at the end of each conversation and feed results into your reporting tools.
+              </p>
+            </div>
+            <div class="integration-group">
+              <h3>Knowledge Base & Docs</h3>
+              <p>
+                Train the AI on your product documentation, FAQs, and support guides so answers are always accurate and up to date.
+              </p>
+            </div>
+            <div class="integration-group">
+              <h3>Messaging & Comms</h3>
+              <p>
+                Connect across your web chat, email, and messaging channels so customers get consistent support wherever they reach out.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <section id="results" class="section">
+        <div class="container">
+          <div class="section-intro">
+            <span class="eyebrow">Results</span>
+            <h2>Real impact.<br />Measurable returns.</h2>
+          </div>
+          <div class="stats stats-4">
+            <div class="stat">
+              <div class="stat-num">80%</div>
+              <p>Of support queries resolved automatically</p>
+            </div>
+            <div class="stat">
+              <div class="stat-num">3&times;</div>
+              <p>Faster response time vs. manual support</p>
+            </div>
+            <div class="stat">
+              <div class="stat-num">30+</div>
+              <p>Languages supported out of the box</p>
+            </div>
+            <div class="stat">
+              <div class="stat-num">24/7</div>
+              <p>Availability, 365 days a year</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works -->
+      <section id="how" class="section">
+        <div class="container">
+          <div class="section-intro">
+            <span class="eyebrow">How It Works</span>
+            <h2>Live in days,<br />not months.</h2>
+          </div>
+          <div class="how-steps">
+            <div class="how-step">
+              <div class="how-step-num">01</div>
+              <h3>Connect Your Knowledge</h3>
+              <p>
+                Upload your FAQs, product docs, and support guides. The AI learns your product inside out and stays accurate as things change.
+              </p>
+            </div>
+            <div class="how-step">
+              <div class="how-step-num">02</div>
+              <h3>Deploy Across Channels</h3>
+              <p>
+                Launch your branded AI assistant on web, email, and messaging apps, all from a single configuration.
+              </p>
+            </div>
+            <div class="how-step">
+              <div class="how-step-num">03</div>
+              <h3>Monitor & Improve</h3>
+              <p>
+                Track resolution rates and customer satisfaction in real time, step in when needed, and sharpen the AI as you go.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA + Footer -->
+      <section id="about" class="section">
+        <div class="container">
+          <div class="rule"></div>
+          <div class="cta-block">
+            <span class="eyebrow text-center">Get Started</span>
+            <h2>Ready to work smarter?</h2>
+            <a href="contact.html" class="btn btn-primary btn-lg">Book Call</a>
+            <p class="cta-sub">No commitment. No sales pressure.</p>
+          </div>
+          <div id="footer-placeholder"></div>
+        </div>
+      </section>
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/menu.js"></script>
+    <script src="assets/js/page-transition.js"></script>
+    <script src="assets/js/scene.js"></script>
+  </body>
+</html>

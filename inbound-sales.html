@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Assistants for Inbound Sales — Octopus AI</title>
+    <meta
+      name="description"
+      content="Qualify leads instantly, answer product questions 24/7, and hand warm prospects to your sales team ready to close."
+    />
+    <link rel="canonical" href="https://asktheoctopus.com/inbound-sales" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://asktheoctopus.com/inbound-sales" />
+    <meta property="og:title" content="AI Assistants for Inbound Sales — Octopus AI" />
+    <meta
+      property="og:description"
+      content="Qualify leads instantly, answer product questions 24/7, and hand warm prospects to your sales team ready to close."
+    />
+    <meta property="og:image" content="https://asktheoctopus.com/assets/images/logo-primary.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AI Assistants for Inbound Sales — Octopus AI" />
+    <meta
+      name="twitter:description"
+      content="Qualify leads instantly, answer product questions 24/7, and hand warm prospects to your sales team ready to close."
+    />
+    <meta name="twitter:image" content="https://asktheoctopus.com/assets/images/logo-primary.png" />
+    <link rel="icon" href="assets/images/logo-primary.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (function () {
+        try {
+          if (window.sessionStorage.getItem("octopus_page_transition") === "1") {
+            document.documentElement.classList.add("transition-pending");
+          }
+        } catch (error) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <style>
+      .value-props {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        margin-top: 38px;
+        background: rgba(127, 216, 190, 0.07);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .value-prop {
+        background: var(--surface-card);
+        padding: 36px 28px;
+        transition: background 0.2s;
+      }
+      .value-prop:hover { background: var(--surface-card-hover); }
+      .vp-icon {
+        width: 42px; height: 42px; margin-bottom: 18px;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(127, 216, 190, 0.1);
+        border-radius: 10px; padding: 9px;
+      }
+      .vp-icon svg { width: 22px; height: 22px; }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        margin-top: 38px;
+        background: rgba(127, 216, 190, 0.07);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .feature-card {
+        background: var(--surface-card);
+        padding: 28px 24px;
+        transition: background 0.2s;
+      }
+      .feature-card:hover { background: var(--surface-card-hover); }
+      .feat-icon {
+        width: 38px; height: 38px; margin-bottom: 14px;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(127, 216, 190, 0.1);
+        border-radius: 9px; padding: 8px;
+      }
+      .feat-icon svg { width: 20px; height: 20px; }
+      .feature-card h3 { font-size: 15px; margin-bottom: 8px; }
+      .feature-card p { font-size: 13px; }
+
+      .integrations-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        margin-top: 38px;
+      }
+      .integration-group {
+        padding: 24px;
+        background: var(--surface-card);
+        border-radius: 11px;
+        border: 1px solid var(--border-faint);
+      }
+      .integration-group h3 {
+        font-size: 13px; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.08em;
+        color: var(--color-accent); margin-bottom: 14px;
+      }
+
+      .stats-4 { grid-template-columns: repeat(4, 1fr); }
+
+      .how-steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        margin-top: 38px;
+        background: rgba(127, 216, 190, 0.07);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .how-step {
+        background: var(--surface-card);
+        padding: 36px 28px;
+        transition: background 0.2s;
+      }
+      .how-step:hover { background: var(--surface-card-hover); }
+      .how-step-num {
+        font-family: var(--font-display); font-size: 38px;
+        font-weight: 700; color: rgba(127, 216, 190, 0.2);
+        line-height: 1; margin-bottom: 18px;
+      }
+      .how-step h3 { font-size: 16px; margin-bottom: 10px; }
+
+      @media (max-width: 768px) {
+        .value-props, .features-grid, .how-steps { grid-template-columns: 1fr; }
+        .integrations-grid { grid-template-columns: 1fr; }
+        .stats-4 { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 480px) {
+        .stats-4 { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="scene" aria-hidden="true"></canvas>
+    <div id="nav-placeholder"></div>
+    <main>
+
+      <!-- Hero -->
+      <section id="top" class="section">
+        <div class="container">
+          <div class="hero">
+            <div class="hero-text">
+              <h1>AI Assistants For<br /><em>Inbound Sales.</em></h1>
+              <p class="lead">
+                Qualify leads instantly, answer product questions 24/7, and hand warm prospects to your sales team ready to close.
+              </p>
+              <div class="hero-actions">
+                <a href="contact.html" class="btn btn-primary btn-lg">Book a Demo</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Value Props -->
+      <section id="value" class="section">
+        <div class="container">
+          <div class="section-intro max-w-500">
+            <span class="eyebrow">Why Octopus AI</span>
+            <h2>More pipeline.<br />Less wasted time.</h2>
+          </div>
+          <div class="value-props">
+            <div class="value-prop">
+              <div class="vp-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <circle cx="11" cy="11" r="8"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+              </div>
+              <h3>Qualify Every Lead Instantly</h3>
+              <p>
+                Your AI asks the right questions the moment a prospect lands. No waiting for a rep to be available. Every lead gets a timely, consistent response.
+              </p>
+            </div>
+            <div class="value-prop">
+              <div class="vp-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+              </div>
+              <h3>Never Miss an Inbound</h3>
+              <p>
+                Prospects reach out at all hours. Your AI is always on, capturing interest and keeping conversations warm until your team picks up.
+              </p>
+            </div>
+            <div class="value-prop">
+              <div class="vp-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <circle cx="18" cy="5" r="3"/>
+                  <circle cx="6" cy="12" r="3"/>
+                  <circle cx="18" cy="19" r="3"/>
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                </svg>
+              </div>
+              <h3>Connects to Your Stack</h3>
+              <p>
+                Sync with your CRM, calendar, and communication tools in minutes. No rebuilding your workflow. Octopus AI slots in where you already work.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Grid -->
+      <section id="features" class="section">
+        <div class="container">
+          <div class="section-intro max-w-500">
+            <span class="eyebrow">Features</span>
+            <h2>Everything your sales team needs,<br />built in from day one.</h2>
+          </div>
+          <div class="features-grid">
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <circle cx="11" cy="11" r="8"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+              </div>
+              <h3>Lead Qualification</h3>
+              <p>Automatically gather company size, use case, and budget before your reps get involved.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+              </div>
+              <h3>Meeting Booking</h3>
+              <p>Qualified prospects book a call directly from the chat. No back-and-forth emails or dropped leads.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+              </div>
+              <h3>Product Q&A</h3>
+              <p>Answer pricing, feature, and comparison questions accurately, any time of day, in your brand's voice.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              </div>
+              <h3>Rep Handoff</h3>
+              <p>Hot leads are flagged and handed to the right rep with full conversation context already captured.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <line x1="18" y1="20" x2="18" y2="10"/>
+                  <line x1="12" y1="20" x2="12" y2="4"/>
+                  <line x1="6" y1="20" x2="6" y2="14"/>
+                </svg>
+              </div>
+              <h3>Pipeline Insights</h3>
+              <p>See which channels drive the most qualified conversations and where prospects drop off.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <rect x="3" y="3" width="18" height="18" rx="3"/>
+                  <path d="M9 9h6M9 12h6M9 15h4"/>
+                </svg>
+              </div>
+              <h3>White-Label</h3>
+              <p>Your brand, your tone. The assistant represents your company exactly as you'd want at every touchpoint.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Integrations -->
+      <section id="integrations" class="section">
+        <div class="container">
+          <div class="section-intro max-w-500">
+            <span class="eyebrow">Integrations</span>
+            <h2>Works with your existing stack.</h2>
+          </div>
+          <div class="integrations-grid">
+            <div class="integration-group">
+              <h3>CRM & Pipeline</h3>
+              <p>
+                Log qualified leads, update deal stages, and keep your pipeline accurate without reps manually entering data.
+              </p>
+            </div>
+            <div class="integration-group">
+              <h3>Calendar & Scheduling</h3>
+              <p>
+                Let prospects book meetings directly from the conversation, synced with your team's availability in real time.
+              </p>
+            </div>
+            <div class="integration-group">
+              <h3>Knowledge Base & Docs</h3>
+              <p>
+                Train the AI on your product pages, pricing docs, and sales collateral so every answer is accurate and on-brand.
+              </p>
+            </div>
+            <div class="integration-group">
+              <h3>Messaging & Comms</h3>
+              <p>
+                Capture inbound interest across your website, email, and messaging channels from a single configuration.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <section id="results" class="section">
+        <div class="container">
+          <div class="section-intro">
+            <span class="eyebrow">Results</span>
+            <h2>Real impact.<br />Measurable returns.</h2>
+          </div>
+          <div class="stats stats-4">
+            <div class="stat">
+              <div class="stat-num">3&times;</div>
+              <p>More leads qualified with the same team</p>
+            </div>
+            <div class="stat">
+              <div class="stat-num">80%</div>
+              <p>Of inbound queries handled automatically</p>
+            </div>
+            <div class="stat">
+              <div class="stat-num">30+</div>
+              <p>Languages supported out of the box</p>
+            </div>
+            <div class="stat">
+              <div class="stat-num">24/7</div>
+              <p>Availability across every time zone</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works -->
+      <section id="how" class="section">
+        <div class="container">
+          <div class="section-intro">
+            <span class="eyebrow">How It Works</span>
+            <h2>Live in days,<br />not months.</h2>
+          </div>
+          <div class="how-steps">
+            <div class="how-step">
+              <div class="how-step-num">01</div>
+              <h3>Connect Your Knowledge</h3>
+              <p>
+                Upload your product docs, pricing, and FAQs. The AI learns your offering and qualification criteria automatically.
+              </p>
+            </div>
+            <div class="how-step">
+              <div class="how-step-num">02</div>
+              <h3>Deploy Across Channels</h3>
+              <p>
+                Launch your branded assistant on your website, email, and messaging apps, all from a single configuration.
+              </p>
+            </div>
+            <div class="how-step">
+              <div class="how-step-num">03</div>
+              <h3>Monitor & Improve</h3>
+              <p>
+                Track qualified lead volume, conversion rates, and drop-off points in real time. Sharpen the AI as you learn.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA + Footer -->
+      <section id="about" class="section">
+        <div class="container">
+          <div class="rule"></div>
+          <div class="cta-block">
+            <span class="eyebrow text-center">Get Started</span>
+            <h2>Ready to work smarter?</h2>
+            <a href="contact.html" class="btn btn-primary btn-lg">Book Call</a>
+            <p class="cta-sub">No commitment. No sales pressure.</p>
+          </div>
+          <div id="footer-placeholder"></div>
+        </div>
+      </section>
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/menu.js"></script>
+    <script src="assets/js/page-transition.js"></script>
+    <script src="assets/js/scene.js"></script>
+  </body>
+</html>

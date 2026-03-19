@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Assistants for Procurement — Octopus AI</title>
+    <meta
+      name="description"
+      content="Handle supplier queries, streamline approvals, and keep procurement running smoothly without adding headcount."
+    />
+    <link rel="canonical" href="https://asktheoctopus.com/procurement" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://asktheoctopus.com/procurement" />
+    <meta property="og:title" content="AI Assistants for Procurement — Octopus AI" />
+    <meta
+      property="og:description"
+      content="Handle supplier queries, streamline approvals, and keep procurement running smoothly without adding headcount."
+    />
+    <meta property="og:image" content="https://asktheoctopus.com/assets/images/logo-primary.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AI Assistants for Procurement — Octopus AI" />
+    <meta
+      name="twitter:description"
+      content="Handle supplier queries, streamline approvals, and keep procurement running smoothly without adding headcount."
+    />
+    <meta name="twitter:image" content="https://asktheoctopus.com/assets/images/logo-primary.png" />
+    <link rel="icon" href="assets/images/logo-primary.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (function () {
+        try {
+          if (window.sessionStorage.getItem("octopus_page_transition") === "1") {
+            document.documentElement.classList.add("transition-pending");
+          }
+        } catch (error) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <style>
+      .value-props {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        margin-top: 38px;
+        background: rgba(127, 216, 190, 0.07);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .value-prop {
+        background: var(--surface-card);
+        padding: 36px 28px;
+        transition: background 0.2s;
+      }
+      .value-prop:hover { background: var(--surface-card-hover); }
+      .vp-icon {
+        width: 42px; height: 42px; margin-bottom: 18px;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(127, 216, 190, 0.1);
+        border-radius: 10px; padding: 9px;
+      }
+      .vp-icon svg { width: 22px; height: 22px; }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        margin-top: 38px;
+        background: rgba(127, 216, 190, 0.07);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .feature-card {
+        background: var(--surface-card);
+        padding: 28px 24px;
+        transition: background 0.2s;
+      }
+      .feature-card:hover { background: var(--surface-card-hover); }
+      .feat-icon {
+        width: 38px; height: 38px; margin-bottom: 14px;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(127, 216, 190, 0.1);
+        border-radius: 9px; padding: 8px;
+      }
+      .feat-icon svg { width: 20px; height: 20px; }
+      .feature-card h3 { font-size: 15px; margin-bottom: 8px; }
+      .feature-card p { font-size: 13px; }
+
+      .integrations-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        margin-top: 38px;
+      }
+      .integration-group {
+        padding: 24px;
+        background: var(--surface-card);
+        border-radius: 11px;
+        border: 1px solid var(--border-faint);
+      }
+      .integration-group h3 {
+        font-size: 13px; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.08em;
+        color: var(--color-accent); margin-bottom: 14px;
+      }
+
+      .stats-4 { grid-template-columns: repeat(4, 1fr); }
+
+      .how-steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        margin-top: 38px;
+        background: rgba(127, 216, 190, 0.07);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .how-step {
+        background: var(--surface-card);
+        padding: 36px 28px;
+        transition: background 0.2s;
+      }
+      .how-step:hover { background: var(--surface-card-hover); }
+      .how-step-num {
+        font-family: var(--font-display); font-size: 38px;
+        font-weight: 700; color: rgba(127, 216, 190, 0.2);
+        line-height: 1; margin-bottom: 18px;
+      }
+      .how-step h3 { font-size: 16px; margin-bottom: 10px; }
+
+      @media (max-width: 768px) {
+        .value-props, .features-grid, .how-steps { grid-template-columns: 1fr; }
+        .integrations-grid { grid-template-columns: 1fr; }
+        .stats-4 { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 480px) {
+        .stats-4 { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="scene" aria-hidden="true"></canvas>
+    <div id="nav-placeholder"></div>
+    <main>
+
+      <!-- Hero -->
+      <section id="top" class="section">
+        <div class="container">
+          <div class="hero">
+            <div class="hero-text">
+              <h1>AI Assistants For<br /><em>Procurement.</em></h1>
+              <p class="lead">
+                Handle supplier queries, streamline approvals, and keep procurement running smoothly without adding headcount.
+              </p>
+              <div class="hero-actions">
+                <a href="contact.html" class="btn btn-primary btn-lg">Book a Demo</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Value Props -->
+      <section id="value" class="section">
+        <div class="container">
+          <div class="section-intro max-w-500">
+            <span class="eyebrow">Why Octopus AI</span>
+            <h2>Less back-and-forth.<br />Faster decisions.</h2>
+          </div>
+          <div class="value-props">
+            <div class="value-prop">
+              <div class="vp-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+              </div>
+              <h3>Supplier Queries, Handled</h3>
+              <p>
+                Your AI answers supplier questions about order status, payment terms, and documentation requirements without pulling your team into routine correspondence.
+              </p>
+            </div>
+            <div class="value-prop">
+              <div class="vp-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <polyline points="9 11 12 14 22 4"/>
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                </svg>
+              </div>
+              <h3>Faster Approvals</h3>
+              <p>
+                Route requests to the right approver instantly, chase outstanding sign-offs automatically, and keep procurement timelines on track.
+              </p>
+            </div>
+            <div class="value-prop">
+              <div class="vp-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <circle cx="18" cy="5" r="3"/>
+                  <circle cx="6" cy="12" r="3"/>
+                  <circle cx="18" cy="19" r="3"/>
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                </svg>
+              </div>
+              <h3>Connects to Your Stack</h3>
+              <p>
+                Sync with your procurement system, document storage, and communication tools in minutes. No rebuilding your workflow.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Grid -->
+      <section id="features" class="section">
+        <div class="container">
+          <div class="section-intro max-w-500">
+            <span class="eyebrow">Features</span>
+            <h2>Everything your procurement team needs,<br />built in from day one.</h2>
+          </div>
+          <div class="features-grid">
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+              </div>
+              <h3>Supplier Q&A</h3>
+              <p>Answer supplier questions about orders, payment terms, and onboarding requirements at any hour.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <polyline points="9 11 12 14 22 4"/>
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                </svg>
+              </div>
+              <h3>Approval Routing</h3>
+              <p>Automatically route purchase requests to the right approver and chase sign-offs so nothing stalls.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                  <polyline points="10 9 9 9 8 9"/>
+                </svg>
+              </div>
+              <h3>Document Handling</h3>
+              <p>Guide suppliers through submitting the right documentation and flag missing or incorrect files automatically.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <h3>Status Updates</h3>
+              <p>Suppliers and internal stakeholders get instant answers on order and request status without chasing anyone.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/>
+                </svg>
+              </div>
+              <h3>Multilingual</h3>
+              <p>Communicate with suppliers across 30+ languages. Ideal for global supply chains and cross-border procurement.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7fd8be" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M12 3l7 3v5c0 5-3.2 8-7 10-3.8-2-7-5-7-10V6l7-3z"/>
+                  <polyline points="9 12.5 11.3 14.8 15.5 10.6"/>
+                </svg>
+              </div>
+              <h3>Secure</h3>
+              <p>Enterprise-grade encryption and role-based permissions. Sensitive procurement data stays protected.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Integrations -->
+      <section id="integrations" class="section">
+        <div class="container">
+          <div class="section-intro max-w-500">
+            <span class="eyebrow">Integrations</span>
+            <h2>Works with your existing stack.</h2>
+          </div>
+          <div class="integrations-grid">
+            <div class="integration-group">
+              <h3>Procurement Systems</h3>
+              <p>
+                Connect your existing procurement platform to log requests, update statuses, and keep records accurate without manual entry.
+              </p>
+            </div>
+            <div class="integration-group">
+              <h3>Document Storage</h3>
+              <p>
+                Pull from your document library to train the AI on procurement policies, supplier requirements, and approval workflows.
+              </p>
+            </div>
+            <div class="integration-group">
+              <h3>Communication Tools</h3>
+              <p>
+                Send approval requests, status updates, and supplier notifications through the channels your team already uses.
+              </p>
+            </div>
+            <div class="integration-group">
+              <h3>Finance & ERP</h3>
+              <p>
+                Sync with your finance and ERP systems so purchase requests flow through the right approval chains automatically.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <section id="results" class="section">
+        <div class="container">
+          <div class="section-intro">
+            <span class="eyebrow">Results</span>
+            <h2>Real impact.<br />Measurable returns.</h2>
+          </div>
+          <div class="stats stats-4">
+            <div class="stat">
+              <div class="stat-num">80%</div>
+              <p>Of supplier queries resolved automatically</p>
+            </div>
+            <div class="stat">
+              <div class="stat-num">3&times;</div>
+              <p>Faster approval turnaround times</p>
+            </div>
+            <div class="stat">
+              <div class="stat-num">30+</div>
+              <p>Languages supported out of the box</p>
+            </div>
+            <div class="stat">
+              <div class="stat-num">24/7</div>
+              <p>Availability for suppliers in any time zone</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works -->
+      <section id="how" class="section">
+        <div class="container">
+          <div class="section-intro">
+            <span class="eyebrow">How It Works</span>
+            <h2>Live in days,<br />not months.</h2>
+          </div>
+          <div class="how-steps">
+            <div class="how-step">
+              <div class="how-step-num">01</div>
+              <h3>Connect Your Knowledge</h3>
+              <p>
+                Upload your procurement policies, supplier guidelines, and approval workflows. The AI learns your processes automatically.
+              </p>
+            </div>
+            <div class="how-step">
+              <div class="how-step-num">02</div>
+              <h3>Deploy Across Channels</h3>
+              <p>
+                Launch your assistant for suppliers and internal teams across email, web, and messaging, all from a single configuration.
+              </p>
+            </div>
+            <div class="how-step">
+              <div class="how-step-num">03</div>
+              <h3>Monitor & Improve</h3>
+              <p>
+                Track query volumes, approval cycle times, and supplier satisfaction in real time. Refine as your processes evolve.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA + Footer -->
+      <section id="about" class="section">
+        <div class="container">
+          <div class="rule"></div>
+          <div class="cta-block">
+            <span class="eyebrow text-center">Get Started</span>
+            <h2>Ready to work smarter?</h2>
+            <a href="contact.html" class="btn btn-primary btn-lg">Book Call</a>
+            <p class="cta-sub">No commitment. No sales pressure.</p>
+          </div>
+          <div id="footer-placeholder"></div>
+        </div>
+      </section>
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/menu.js"></script>
+    <script src="assets/js/page-transition.js"></script>
+    <script src="assets/js/scene.js"></script>
+  </body>
+</html>
