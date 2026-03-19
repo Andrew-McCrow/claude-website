@@ -98,21 +98,6 @@
       "permanent": true
     },
     {
-      "source": "/pricing",
-      "destination": "/archive-pricing",
-      "permanent": true
-    },
-    {
-      "source": "/pricing/",
-      "destination": "/archive-pricing",
-      "permanent": true
-    },
-    {
-      "source": "/pricing.html",
-      "destination": "/archive-pricing",
-      "permanent": true
-    },
-    {
       "source": "/archive-pricing/",
       "destination": "/archive-pricing",
       "permanent": true
