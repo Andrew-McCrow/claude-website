@@ -1,0 +1,901 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Assistants for Property Management — Octopus AI</title>
+    <meta
+      name="description"
+      content="Stop answering the same questions twice. Handle escalations instantly. Works with your existing tools."
+    />
+    <link
+      rel="canonical"
+      href="https://asktheoctopus.com/property-management.html"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://asktheoctopus.com/property-management.html"
+    />
+    <meta
+      property="og:title"
+      content="AI Assistants for Property Management — Octopus AI"
+    />
+    <meta
+      property="og:description"
+      content="Stop answering the same questions twice. Handle escalations instantly. Works with your existing tools."
+    />
+    <meta
+      property="og:image"
+      content="https://asktheoctopus.com/public/Logos/Logo - Primary Accent.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI Assistants for Property Management — Octopus AI"
+    />
+    <meta
+      name="twitter:description"
+      content="Stop answering the same questions twice. Handle escalations instantly. Works with your existing tools."
+    />
+    <meta
+      name="twitter:image"
+      content="https://asktheoctopus.com/public/Logos/Logo - Primary Accent.png"
+    />
+    <link rel="icon" href="public/Logos/Logo - Primary Accent.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (function () {
+        try {
+          if (
+            window.sessionStorage.getItem("octopus_page_transition") === "1"
+          ) {
+            document.documentElement.classList.add("transition-pending");
+          }
+        } catch (error) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <style>
+      /* -----------------------------------------------------------------------
+         Property Management page — scoped additions
+         ----------------------------------------------------------------------- */
+
+      /* Channel badges in the hero */
+      .channel-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 24px;
+      }
+
+      .channel-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 12px;
+        border: 1px solid rgba(127, 216, 190, 0.22);
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        color: rgba(250, 250, 248, 0.7);
+        background: rgba(127, 216, 190, 0.06);
+      }
+
+      .channel-badge svg {
+        width: 13px;
+        height: 13px;
+        flex-shrink: 0;
+      }
+
+      /* Value props — 3-column grid */
+      .value-props {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        margin-top: 38px;
+        background: rgba(127, 216, 190, 0.07);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+
+      .value-prop {
+        background: var(--surface-card);
+        padding: 36px 28px;
+        transition: background 0.2s;
+      }
+
+      .value-prop:hover {
+        background: var(--surface-card-hover);
+      }
+
+      .vp-icon {
+        width: 42px;
+        height: 42px;
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(127, 216, 190, 0.1);
+        border-radius: 10px;
+        padding: 9px;
+      }
+
+      .vp-icon svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      /* Features 3×3 grid */
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        margin-top: 38px;
+        background: rgba(127, 216, 190, 0.07);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+
+      .feature-card {
+        background: var(--surface-card);
+        padding: 28px 24px;
+        transition: background 0.2s;
+      }
+
+      .feature-card:hover {
+        background: var(--surface-card-hover);
+      }
+
+      .feat-icon {
+        width: 38px;
+        height: 38px;
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(127, 216, 190, 0.1);
+        border-radius: 9px;
+        padding: 8px;
+      }
+
+      .feat-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .feature-card h3 {
+        font-size: 15px;
+        margin-bottom: 8px;
+      }
+
+      .feature-card p {
+        font-size: 13px;
+      }
+
+      /* Use Cases */
+      .use-cases-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        margin-top: 38px;
+      }
+
+      .use-case-card {
+        padding: 28px 28px;
+        background: var(--surface-testimonial);
+        border-radius: 11px;
+        border: 1px solid var(--border-subtle);
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+      }
+
+      .use-case-card:hover {
+        background: var(--surface-card-hover);
+        border-color: rgba(127, 216, 190, 0.2);
+      }
+
+      .uc-trigger {
+        font-family: Georgia, serif;
+        font-style: italic;
+        font-size: 14px;
+        color: rgba(250, 250, 248, 0.5);
+        margin-bottom: 12px;
+        line-height: 1.5;
+      }
+
+      .uc-title {
+        font-family: var(--font-display);
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--color-text);
+        margin-bottom: 6px;
+      }
+
+      .uc-desc {
+        font-size: 13px;
+        color: rgba(250, 250, 248, 0.52);
+        line-height: 1.6;
+      }
+
+      /* Integrations */
+      .integrations-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        margin-top: 38px;
+      }
+
+      .integration-group {
+        padding: 24px 24px;
+        background: var(--surface-card);
+        border-radius: 11px;
+        border: 1px solid var(--border-faint);
+      }
+
+      .integration-group h3 {
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--color-accent);
+        margin-bottom: 14px;
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+      }
+
+      .pill {
+        padding: 5px 11px;
+        border: 1px solid rgba(127, 216, 190, 0.18);
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 500;
+        color: rgba(250, 250, 248, 0.65);
+        background: rgba(127, 216, 190, 0.05);
+      }
+
+      /* Stats — 4 column override for this page */
+      .stats-4 {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      /* How it works steps — horizontal 3-up layout */
+      .how-steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        margin-top: 38px;
+        background: rgba(127, 216, 190, 0.07);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+
+      .how-step {
+        background: var(--surface-card);
+        padding: 36px 28px;
+        transition: background 0.2s;
+      }
+
+      .how-step:hover {
+        background: var(--surface-card-hover);
+      }
+
+      .how-step-num {
+        font-family: var(--font-display);
+        font-size: 38px;
+        font-weight: 700;
+        color: rgba(127, 216, 190, 0.2);
+        line-height: 1;
+        margin-bottom: 18px;
+      }
+
+      .how-step h3 {
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+
+      /* Responsive overrides */
+      @media (max-width: 768px) {
+        .value-props,
+        .features-grid,
+        .how-steps {
+          grid-template-columns: 1fr;
+        }
+
+        .use-cases-grid,
+        .integrations-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .stats-4 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .stats-4 {
+          grid-template-columns: 1fr;
+        }
+
+        .channel-badges {
+          gap: 6px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="scene" aria-hidden="true"></canvas>
+    <div id="nav-placeholder"></div>
+    <main>
+      <!-- ===================================================================
+           Hero
+           =================================================================== -->
+      <section id="top" class="section">
+        <div class="container">
+          <div class="hero">
+            <div class="hero-text">
+              <h1>AI Assistants For<br /><em>Property Management.</em></h1>
+              <p class="lead">
+                Stop answering the same questions twice. Handle escalations
+                instantly. Works with your existing tools.
+              </p>
+              <div class="hero-actions">
+                <a href="contact.html" class="btn btn-primary btn-lg"
+                  >Book a Demo</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           Value Props
+           =================================================================== -->
+      <section id="value" class="section">
+        <div class="container">
+          <div class="section-intro max-w-500">
+            <span class="eyebrow">Why Octopus AI</span>
+            <h2>Less routine work.<br />More satisfied tenants.</h2>
+          </div>
+          <div class="value-props">
+            <div class="value-prop">
+              <div class="vp-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#7fd8be"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </div>
+              <h3>Always-On Support</h3>
+              <p>
+                Your AI assistant handles tenant FAQs around the clock.
+                Maintenance status, lease questions, amenity info — answered
+                without staff intervention.
+              </p>
+            </div>
+            <div class="value-prop">
+              <div class="vp-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#7fd8be"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+                  <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+                  <line x1="6" y1="1" x2="6" y2="4" />
+                  <line x1="10" y1="1" x2="10" y2="4" />
+                  <line x1="14" y1="1" x2="14" y2="4" />
+                </svg>
+              </div>
+              <h3>Instant Human Escalation</h3>
+              <p>
+                Live escalation alerts let your team take over any conversation
+                instantly. The moment something needs a human, you're notified
+                and in control.
+              </p>
+            </div>
+            <div class="value-prop">
+              <div class="vp-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#7fd8be"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <circle cx="18" cy="5" r="3" />
+                  <circle cx="6" cy="12" r="3" />
+                  <circle cx="18" cy="19" r="3" />
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                </svg>
+              </div>
+              <h3>Connects in Minutes</h3>
+              <p>
+                Sync with your PMS, support tools, and knowledge base in
+                minutes. No rebuilding your stack. Octopus AI slots in where you
+                already work.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           Features Grid (3×3)
+           =================================================================== -->
+      <section id="features" class="section">
+        <div class="container">
+          <div class="section-intro max-w-500">
+            <span class="eyebrow">Features</span>
+            <h2>Everything your team needs,<br />built in from day one.</h2>
+          </div>
+          <div class="features-grid">
+            <!-- 1 Chat Everywhere -->
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#7fd8be"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path
+                    d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                  />
+                </svg>
+              </div>
+              <h3>Chat Everywhere</h3>
+              <p>
+                Deploy on your website, WhatsApp, Messenger, and email. One
+                assistant, every channel.
+              </p>
+            </div>
+
+            <!-- 2 Multilingual -->
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#7fd8be"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"
+                  />
+                </svg>
+              </div>
+              <h3>Multilingual</h3>
+              <p>
+                Support tenants in 30+ languages automatically. No extra
+                configuration required.
+              </p>
+            </div>
+
+            <!-- 3 White-Label -->
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#7fd8be"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <rect x="3" y="3" width="18" height="18" rx="3" />
+                  <path d="M9 9h6M9 12h6M9 15h4" />
+                </svg>
+              </div>
+              <h3>White-Label</h3>
+              <p>
+                Your brand, your colours, your tone. The assistant looks and
+                feels like part of your team.
+              </p>
+            </div>
+
+            <!-- 4 Easy Training -->
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#7fd8be"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                </svg>
+              </div>
+              <h3>Easy Training</h3>
+              <p>
+                Upload FAQs, lease docs, and property guides. The AI learns your
+                content and stays accurate.
+              </p>
+            </div>
+
+            <!-- 5 Live Insights -->
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#7fd8be"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <line x1="18" y1="20" x2="18" y2="10" />
+                  <line x1="12" y1="20" x2="12" y2="4" />
+                  <line x1="6" y1="20" x2="6" y2="14" />
+                </svg>
+              </div>
+              <h3>Live Insights</h3>
+              <p>
+                Real-time dashboards show conversation volume, top questions,
+                and resolution rates at a glance.
+              </p>
+            </div>
+
+            <!-- 6 Human Chat -->
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#7fd8be"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+              </div>
+              <h3>Human Chat</h3>
+              <p>
+                Jump into any conversation live. Alerts notify your team the
+                moment a tenant needs a real person.
+              </p>
+            </div>
+
+            <!-- 7 User Analytics -->
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#7fd8be"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <polyline points="23 6 17 6" />
+                  <line x1="20" y1="3" x2="20" y2="9" />
+                </svg>
+              </div>
+              <h3>User Analytics</h3>
+              <p>
+                Understand which tenants engage most, what issues repeat, and
+                where to focus your team's time.
+              </p>
+            </div>
+
+            <!-- 8 Automate Tasks -->
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#7fd8be"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                </svg>
+              </div>
+              <h3>Automate Tasks</h3>
+              <p>
+                Log maintenance requests, handle reservations, update records.
+                The AI acts, not just answers.
+              </p>
+            </div>
+
+            <!-- 9 Secure -->
+            <div class="feature-card">
+              <div class="feat-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#7fd8be"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M12 3l7 3v5c0 5-3.2 8-7 10-3.8-2-7-5-7-10V6l7-3z" />
+                  <polyline points="9 12.5 11.3 14.8 15.5 10.6" />
+                </svg>
+              </div>
+              <h3>Secure</h3>
+              <p>
+                Enterprise-grade encryption, role-based permissions, and data
+                handling built to meet compliance standards.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           Use Cases
+           =================================================================== -->
+      <section id="use-cases" class="section" hidden>
+        <div class="container">
+          <div class="section-intro max-w-500">
+            <span class="eyebrow">Use Cases</span>
+            <h2>Handles the conversations<br />your team shouldn't have to.</h2>
+          </div>
+          <div class="use-cases-grid">
+            <div class="use-case-card">
+              <div class="uc-trigger">"My AC is broken and it's 2am…"</div>
+              <div class="uc-title">Maintenance Request Triage</div>
+              <p class="uc-desc">
+                The AI collects details, logs the ticket in your PMS, and
+                notifies your on-call team — without waking anyone
+                unnecessarily.
+              </p>
+            </div>
+
+            <div class="use-case-card">
+              <div class="uc-trigger">"When does my lease expire?"</div>
+              <div class="uc-title">Lease Renewal Reminders</div>
+              <p class="uc-desc">
+                Automatically reach out ahead of key dates, answer renewal
+                questions, and route tenants to your leasing team when they're
+                ready to sign.
+              </p>
+            </div>
+
+            <div class="use-case-card">
+              <div class="uc-trigger">
+                "Why is my rent different this month?"
+              </div>
+              <div class="uc-title">Rent Payment Questions</div>
+              <p class="uc-desc">
+                The AI explains charges, late fees, and payment options clearly
+                — reducing call volume to your office during peak billing
+                periods.
+              </p>
+            </div>
+
+            <div class="use-case-card">
+              <div class="uc-trigger">
+                "Can I book the rooftop for Saturday?"
+              </div>
+              <div class="uc-title">Amenity Bookings</div>
+              <p class="uc-desc">
+                Check availability, confirm reservations, and send reminders —
+                entirely automated from first message to confirmation.
+              </p>
+            </div>
+
+            <div class="use-case-card">
+              <div class="uc-trigger">
+                "What do I need to do before moving out?"
+              </div>
+              <div class="uc-title">Move-In / Move-Out Checklists</div>
+              <p class="uc-desc">
+                Walk tenants through every step, send the right documents, and
+                schedule inspections — no staff time required for routine
+                coordination.
+              </p>
+            </div>
+
+            <div class="use-case-card">
+              <div class="uc-trigger">
+                "Is there parking available for guests?"
+              </div>
+              <div class="uc-title">General Property FAQs</div>
+              <p class="uc-desc">
+                Policies, visitor rules, utilities, recycling schedules — the AI
+                knows your property inside out and answers instantly, any hour
+                of the day.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           Integrations
+           =================================================================== -->
+      <section id="integrations" class="section">
+        <div class="container">
+          <div class="section-intro max-w-500">
+            <span class="eyebrow">Integrations</span>
+            <h2>Works with your existing stack.</h2>
+          </div>
+          <div class="integrations-grid">
+            <div class="integration-group">
+              <h3>Property Management Systems</h3>
+              <p>
+                Connect your PMS to sync property data, log maintenance
+                requests, and keep records up to date automatically.
+              </p>
+            </div>
+            <div class="integration-group">
+              <h3>CRM &amp; Support Tools</h3>
+              <p>
+                Route conversations, create tickets, and update contact records
+                inside the tools your team already uses.
+              </p>
+            </div>
+            <div class="integration-group">
+              <h3>Messaging &amp; Comms</h3>
+              <p>
+                Send notifications, escalation alerts, and regular summaries
+                through your existing messaging channels.
+              </p>
+            </div>
+            <div class="integration-group">
+              <h3>Document Storage</h3>
+              <p>
+                Pull from your existing document library to train the AI on
+                leases, policies, and property guides.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           Stats / Social Proof
+           =================================================================== -->
+      <section id="results" class="section">
+        <div class="container">
+          <div class="section-intro">
+            <span class="eyebrow">Results</span>
+            <h2>Real impact.<br />Measurable returns.</h2>
+          </div>
+          <div class="stats stats-4">
+            <div class="stat">
+              <div class="stat-num">80%</div>
+              <p>Of tenant queries resolved automatically</p>
+            </div>
+            <div class="stat">
+              <div class="stat-num">3&times;</div>
+              <p>Faster response time vs. manual support</p>
+            </div>
+            <div class="stat">
+              <div class="stat-num">30+</div>
+              <p>Languages supported out of the box</p>
+            </div>
+            <div class="stat">
+              <div class="stat-num">24/7</div>
+              <p>Availability, 365 days a year</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           How It Works
+           =================================================================== -->
+      <section id="how" class="section">
+        <div class="container">
+          <div class="section-intro">
+            <span class="eyebrow">How It Works</span>
+            <h2>Live in days,<br />not months.</h2>
+          </div>
+          <div class="how-steps">
+            <div class="how-step">
+              <div class="how-step-num">01</div>
+              <h3>Connect Your Knowledge</h3>
+              <p>
+                Upload your FAQs, lease documents, PMS data, and property
+                guides. The AI learns everything about your properties
+                automatically.
+              </p>
+            </div>
+            <div class="how-step">
+              <div class="how-step-num">02</div>
+              <h3>Deploy Across Channels</h3>
+              <p>
+                Launch your branded AI assistant on your website, WhatsApp,
+                Messenger, and email, all from a single configuration.
+              </p>
+            </div>
+            <div class="how-step">
+              <div class="how-step-num">03</div>
+              <h3>Monitor, Escalate &amp; Improve</h3>
+              <p>
+                Track conversations in real time, take over when needed, and use
+                live insights to continuously improve your assistant's accuracy.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           CTA + Footer
+           =================================================================== -->
+      <section id="about" class="section">
+        <div class="container">
+          <div class="rule"></div>
+          <div class="cta-block">
+            <span class="eyebrow text-center">Get Started</span>
+            <h2>Ready to work smarter?</h2>
+            <a href="contact.html" class="btn btn-primary btn-lg">Book Call</a>
+            <p class="cta-sub">No commitment. No sales pressure.</p>
+          </div>
+          <div id="footer-placeholder"></div>
+        </div>
+      </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/menu.js"></script>
+    <script src="assets/js/page-transition.js"></script>
+    <script src="assets/js/scene.js"></script>
+  </body>
+</html>
